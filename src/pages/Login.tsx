@@ -19,7 +19,7 @@ export default function Login() {
     onSubmit: async ({ value }) => {
       const res = await login(value);
 
-      console.log("xdxd", res);
+      console.log("xdxd", res.data);
 
       // const token = res.data;
 

@@ -7,7 +7,7 @@ const useUser = () => {
     queryFn: () => {
       return axiosClient.get("/notes");
     },
-    // enabled: false,
+    refetchInterval: false,
   });
 
   return { data, refetch };

@@ -20,7 +20,9 @@ import { Route as IndexImport } from './routes/index'
 
 const SettingsLazyImport = createFileRoute('/settings')()
 const RegisterLazyImport = createFileRoute('/register')()
+const ProjectsLazyImport = createFileRoute('/projects')()
 const ProjectLazyImport = createFileRoute('/project')()
+const CreatorLazyImport = createFileRoute('/creator')()
 const ContactsLazyImport = createFileRoute('/contacts')()
 
 // Create/Update Routes
@@ -35,10 +37,20 @@ const RegisterLazyRoute = RegisterLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/register.lazy').then((d) => d.Route))
 
+const ProjectsLazyRoute = ProjectsLazyImport.update({
+  path: '/projects',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/projects.lazy').then((d) => d.Route))
+
 const ProjectLazyRoute = ProjectLazyImport.update({
   path: '/project',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/project.lazy').then((d) => d.Route))
+
+const CreatorLazyRoute = CreatorLazyImport.update({
+  path: '/creator',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/creator.lazy').then((d) => d.Route))
 
 const ContactsLazyRoute = ContactsLazyImport.update({
   path: '/contacts',
@@ -71,8 +83,16 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactsLazyImport
       parentRoute: typeof rootRoute
     }
+    '/creator': {
+      preLoaderRoute: typeof CreatorLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/project': {
       preLoaderRoute: typeof ProjectLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/projects': {
+      preLoaderRoute: typeof ProjectsLazyImport
       parentRoute: typeof rootRoute
     }
     '/register': {
@@ -92,7 +112,9 @@ export const routeTree = rootRoute.addChildren([
   IndexRoute,
   LoginRoute,
   ContactsLazyRoute,
+  CreatorLazyRoute,
   ProjectLazyRoute,
+  ProjectsLazyRoute,
   RegisterLazyRoute,
   SettingsLazyRoute,
 ])

@@ -3,10 +3,10 @@ import ProjectDetails from "../components/ProjectDetails";
 import Main from "../components/layout/Main";
 import clsx from "clsx";
 
-type Tab = "Wizualizacje" | "Rzuty" | "Dane techniczne";
+type Tab = "Ogólne" | "Rzuty" | "Dane techniczne";
 
 const tabs = [
-  { name: "Wizualizacje" },
+  { name: "Ogólne" },
   { name: "Rzuty" },
   { name: "Dane techniczne" },
 ];
@@ -102,26 +102,14 @@ const Stats = () => {
 };
 
 const Projects = () => {
-  const [tab, setTab] = useState<Tab>("Wizualizacje");
+  const [tab, setTab] = useState<Tab>("Ogólne");
 
   return (
     <Main>
-      <ProjectDetails />
-
       <Tabs setTab={setTab} tab={tab} />
 
       <div className="mt-10 lg:px-8">
-        {tab === "Wizualizacje" ? (
-          <div>
-            Wizualizacje
-            <img
-              src="
-          https://i.wpimg.pl/c/1920x720/wpcdn.pl/extradom/designs/72062/586775/04a18fadd290dc53669e54d11546248ff91d35ba975621bb2f3af2b0715e4cd9.jpg"
-              alt=""
-            />
-          </div>
-        ) : null}
-
+        {tab === "Ogólne" ? <ProjectDetails /> : null}
         {tab === "Rzuty" ? (
           <div>
             Rzuty

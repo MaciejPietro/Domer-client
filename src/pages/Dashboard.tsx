@@ -15,37 +15,21 @@ import {
 
 const actions = [
   {
-    title: "Kontakty",
-    href: "/contacts",
-    content: "Lista twoich kontaktów",
-    icon: UsersIcon,
-    iconForeground: "text-sky-700",
-    iconBackground: "bg-sky-50",
-  },
-  {
-    title: "Projekt",
-    href: "/project",
-    content: "Szczegóły wybranego przez Ciebie projektu",
+    title: "Projekty",
+    href: "/projects",
+    content: "Lista twoich projektów",
     icon: FolderIcon,
     iconForeground: "text-yellow-700",
     iconBackground: "bg-yellow-50",
   },
-  {
-    title: "Wesprzyj mnie",
-    content:
-      "Jestem programistą, który buduje swój dom. Stworzyłem tą aplikację aby pomóc pojedyńczym inwestorom trzymać budżet w ryzach i mądrze zarządać budową.",
-    icon: BanknotesIcon,
-    iconForeground: "text-teal-700",
-    iconBackground: "bg-teal-50",
-  },
-  {
-    title: "Wsparcie",
-    content:
-      "Aby uzystać wsparcie podczas korzystania z aplikacji skontaktuj się ze mną. Możesz również zgłaszać błędy i proponować zmiany.",
-    icon: HandRaisedIcon,
-    iconForeground: "text-purple-700",
-    iconBackground: "bg-purple-50",
-  },
+  // {
+  //   title: "Kontakty",
+  //   href: "/contacts",
+  //   content: "Lista twoich kontaktów",
+  //   icon: UsersIcon,
+  //   iconForeground: "text-sky-700",
+  //   iconBackground: "bg-sky-50",
+  // },
   {
     title: "O aplikacji",
     content: "Dowiedz się do czego służy aplikacja",
@@ -54,9 +38,25 @@ const actions = [
     iconBackground: "bg-rose-50",
   },
   {
-    title: "Ustawienia",
+    title: "Kup mi kawę",
+    content: "Wesprzyj mnie kupując mi wirtualną kawę ;)",
+    icon: BanknotesIcon,
+    iconForeground: "text-teal-700",
+    iconBackground: "bg-teal-50",
+  },
+  // {
+  //   title: "Wsparcie",
+  //   content:
+  //     "Aby uzystać wsparcie podczas korzystania z aplikacji skontaktuj się ze mną. Możesz również zgłaszać błędy i proponować zmiany.",
+  //   icon: HandRaisedIcon,
+  //   iconForeground: "text-purple-700",
+  //   iconBackground: "bg-purple-50",
+  // },
+
+  {
+    title: "Ustawienia konta",
     href: "/settings",
-    content: "Ustawienia twojego konta",
+    content: "Zmień swoje dane, lub usuń konto",
     icon: Cog6ToothIcon,
     iconForeground: "text-rose-700",
     iconBackground: "bg-rose-50",

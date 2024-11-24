@@ -1,8 +1,6 @@
 import clsx from "clsx";
 import {
-  // CalendarIcon,
-  // ChartPieIcon,
-  // DocumentDuplicateIcon,
+  InformationCircleIcon,
   FolderIcon,
   HomeIcon,
   ArrowLeftStartOnRectangleIcon,
@@ -15,9 +13,10 @@ import Dialog from "../ui/Dialog";
 import { useState } from "react";
 
 const navigation = [
-  { name: "Panel", href: "/", icon: HomeIcon, current: true },
-  // { name: "Projekt", href: "/project", icon: FolderIcon, current: false },
-  { name: "Kontakty", href: "/contacts", icon: UsersIcon, current: false },
+  { name: "Panel", href: "/", icon: InformationCircleIcon, current: true },
+  { name: "Kreator", href: "/creator", icon: HomeIcon, current: false },
+  { name: "Projekty", href: "/projects", icon: FolderIcon, current: false },
+  // { name: "Kontakty", href: "/contacts", icon: UsersIcon, current: false },
 
   // { name: "Usługi", href: "#", icon: UserIcon, current: false },
   // { name: "Dokumenty", href: "#", icon: DocumentDuplicateIcon, current: false },

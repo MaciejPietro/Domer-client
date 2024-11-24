@@ -25,6 +25,8 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@mantine/core": "^7.14.2",
+		"@mantine/hooks": "^7.14.2",
 		"@tanstack/react-form": "^0.13.6",
 		"@tanstack/react-query": "^5.18.0",
 		"@tanstack/react-router": "^1.15.7",

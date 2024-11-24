@@ -4,23 +4,30 @@ import { RouterProvider, type createRouter } from "@tanstack/react-router";
 import type { FunctionComponent } from "./common/types";
 // import { TanStackRouterDevelopmentTools } from "./components/utils/development-tools/TanStackRouterDevelopmentTools";
 import { Toaster } from "react-hot-toast";
+import { createTheme, MantineProvider } from "@mantine/core";
 
 const queryClient = new QueryClient();
 
 type AppProps = { router: ReturnType<typeof createRouter> };
 
+const theme = createTheme({
+  /** Your theme override here */
+});
+
 const App = ({ router }: AppProps): FunctionComponent => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      {/* <TanStackRouterDevelopmentTools
+    <MantineProvider theme={theme}>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        {/* <TanStackRouterDevelopmentTools
 				router={router}
 				initialIsOpen={false}
 				position="bottom-right"
 			/>
 			<ReactQueryDevtools initialIsOpen={false} /> */}
-      <Toaster position="top-right" cl />
-    </QueryClientProvider>
+        <Toaster position="top-right" />
+      </QueryClientProvider>
+    </MantineProvider>
   );
 };
 

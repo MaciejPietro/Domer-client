@@ -5,6 +5,7 @@ import App from "./App.tsx";
 import { routeTree } from "./routeTree.gen.ts";
 import "./styles/tailwind.css";
 import "./styles/common.css";
+import "@mantine/core/styles.css";
 
 const router = createRouter({ routeTree });
 

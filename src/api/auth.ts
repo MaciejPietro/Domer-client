@@ -4,6 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import axiosClient from "./apiClient";
 import type { AxiosError } from "axios";
 import { toastError } from "@/lib/toast";
+import { loginEndpoint } from "./endpoints";
 
 const handleError = (err: AxiosError<string, any>) => {
   if (err.response?.data) {
@@ -20,13 +21,13 @@ const useLogin = () => {
     LoginPayload
   >({
     mutationKey: ["auth", "login"],
-    mutationFn: () => {
-      const values = {
-        email: "maciej@gmail.com",
-        password: "Secret@123",
-      };
+    mutationFn: (values) => {
+      // const values = {
+      //   email: "maciej@gmail.com",
+      //   password: "Secret@123",
+      // };
 
-      return axiosClient.post("/auth/login", values);
+      return axiosClient.post(loginEndpoint(), values);
     },
 
     onError: (error) => {
@@ -34,7 +35,7 @@ const useLogin = () => {
     },
   });
 
-  return { login: mutateAsync };
+  return { loginFn: mutateAsync };
 };
 
 const useRegister = () => {

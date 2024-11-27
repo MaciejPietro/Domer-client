@@ -7,7 +7,14 @@ import "./styles/tailwind.css";
 import "./styles/common.css";
 import "@mantine/core/styles.css";
 
-const router = createRouter({ routeTree });
+const router = createRouter({
+  routeTree,
+  context: {
+    // auth will initially be undefined
+    // We'll be passing down the auth state from within a React component
+    auth: undefined!,
+  },
+});
 
 declare module "@tanstack/react-router" {
   interface Register {

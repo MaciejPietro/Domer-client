@@ -6,10 +6,11 @@ import { isValidEmail } from "../utils/helpers";
 import { useLogin } from "@/api/auth";
 import type { LoginPayload } from "@/types/api";
 import { useUser } from "@/api/user";
+import { Input, PasswordInput } from "@mantine/core";
 
 export default function Login() {
-  const { login } = useLogin();
-  const { data, refetch } = useUser();
+  const { loginFn } = useLogin();
+  // const { data, refetch } = useUser();
 
   const form = useForm<LoginPayload>({
     defaultValues: {
@@ -17,9 +18,9 @@ export default function Login() {
       password: "",
     },
     onSubmit: async ({ value }) => {
-      const res = await login(value);
+      const res = await loginFn(value);
 
-      console.log("xdxd", res.data);
+      console.log("xdxd res", res);
 
       // const token = res.data;
 
@@ -27,8 +28,6 @@ export default function Login() {
     },
   });
   // refetch();
-
-  console.log("1 data", data);
 
   return (
     <>
@@ -54,33 +53,75 @@ export default function Login() {
                 void form.handleSubmit();
               }}
             >
-              <InputWrapper title="Email">
-                <TextField
-                  name="email"
-                  form={form as any}
-                  validators={{
-                    onBlur: ({ value }: { value: string }) => {
-                      if (!isValidEmail(value)) return "Nieprawidłowy email";
+              <form.Field
+                name="email"
+                validators={{
+                  onBlur: ({ value }: { value: string }) => {
+                    if (!isValidEmail(value)) return "Nieprawidłowy email";
 
-                      return false;
-                    },
-                  }}
-                />
-              </InputWrapper>
+                    return false;
+                  },
+                }}
+              >
+                {(field) => {
+                  return (
+                    <Input.Wrapper
+                      label="Hasło"
+                      error={
+                        field.state.meta.errors ? (
+                          <span className="mt-1 block">
+                            {field.state.meta.errors}
+                          </span>
+                        ) : null
+                      }
+                    >
+                      <Input
+                        value={field.state.value}
+                        onBlur={field.handleBlur}
+                        onChange={(e) => {
+                          field.handleChange(e.target.value);
+                        }}
+                        error={Boolean(field.state.meta.errors.length)}
+                      />
+                    </Input.Wrapper>
+                  );
+                }}
+              </form.Field>
 
-              <InputWrapper title="Hasło">
-                <PasswordField
-                  name="password"
-                  form={form as any}
-                  validators={{
-                    onBlur: ({ value }: { value: string }) => {
-                      if (value.length) return false;
+              <form.Field
+                name="password"
+                validators={{
+                  onBlur: ({ value }: { value: string }) => {
+                    if (value.length) return false;
 
-                      return "Hasło jest wymagane";
-                    },
-                  }}
-                />
-              </InputWrapper>
+                    return "Hasło jest wymagane";
+                  },
+                }}
+              >
+                {(field) => {
+                  return (
+                    <Input.Wrapper
+                      label="Hasło"
+                      error={
+                        field.state.meta.errors ? (
+                          <span className="mt-1 block">
+                            {field.state.meta.errors}
+                          </span>
+                        ) : null
+                      }
+                    >
+                      <PasswordInput
+                        value={field.state.value}
+                        onBlur={field.handleBlur}
+                        onChange={(e) => {
+                          field.handleChange(e.target.value);
+                        }}
+                        error={Boolean(field.state.meta.errors.length)}
+                      />
+                    </Input.Wrapper>
+                  );
+                }}
+              </form.Field>
 
               <div>
                 <button

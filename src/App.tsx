@@ -5,6 +5,7 @@ import type { FunctionComponent } from "./common/types";
 // import { TanStackRouterDevelopmentTools } from "./components/utils/development-tools/TanStackRouterDevelopmentTools";
 import { Toaster } from "react-hot-toast";
 import { createTheme, MantineProvider } from "@mantine/core";
+import useAuth from "@/hooks/useAuth";
 
 const queryClient = new QueryClient();
 
@@ -15,10 +16,12 @@ const theme = createTheme({
 });
 
 const App = ({ router }: AppProps): FunctionComponent => {
+  const auth = useAuth();
+
   return (
     <MantineProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <RouterProvider router={router} context={{ auth }} />
         {/* <TanStackRouterDevelopmentTools
 				router={router}
 				initialIsOpen={false}

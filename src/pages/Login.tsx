@@ -10,7 +10,6 @@ import { Input, PasswordInput } from "@mantine/core";
 
 export default function Login() {
   const { loginFn } = useLogin();
-  // const { data, refetch } = useUser();
 
   const form = useForm<LoginPayload>({
     defaultValues: {
@@ -27,7 +26,6 @@ export default function Login() {
       // window.localStorage.setItem("mytoken", `${token}`);
     },
   });
-  // refetch();
 
   return (
     <>

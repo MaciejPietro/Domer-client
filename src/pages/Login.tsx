@@ -1,29 +1,32 @@
 import { useForm } from "@tanstack/react-form";
-import InputWrapper from "../components/form/InputWrapper";
-import PasswordField from "../components/form/fields/PasswordField";
-import TextField from "../components/form/fields/TextField";
+
 import { isValidEmail } from "../utils/helpers";
-import { useLogin } from "@/api/auth";
 import type { LoginPayload } from "@/types/api";
-import { useUser } from "@/api/user";
-import { Input, PasswordInput } from "@mantine/core";
+import { Button, Input, PasswordInput } from "@mantine/core";
+import useLogin from "@/hooks/useLogin";
+import useAuthStore from "@/store/authStore";
+import { useNavigate } from "@tanstack/react-router";
 
 export default function Login() {
-  const { loginFn } = useLogin();
+  const { mutateAsync, isPending, error } = useLogin();
+  const { setAuth } = useAuthStore();
+  const navigate = useNavigate();
 
   const form = useForm<LoginPayload>({
     defaultValues: {
-      email: "",
-      password: "",
+      email: "admin@admin.pl",
+      password: "House@09!",
     },
     onSubmit: async ({ value }) => {
-      const res = await loginFn(value);
+      const res = await mutateAsync(value);
 
-      console.log("xdxd res", res);
+      if (res.status === 200) {
+        setAuth(true);
 
-      // const token = res.data;
-
-      // window.localStorage.setItem("mytoken", `${token}`);
+        queueMicrotask(() => {
+          void navigate({ to: "/" });
+        });
+      }
     },
   });
 
@@ -44,7 +47,7 @@ export default function Login() {
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form.Provider>
             <form
-              className="space-y-8"
+              className="flex flex-col gap-7"
               onSubmit={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -54,32 +57,35 @@ export default function Login() {
               <form.Field
                 name="email"
                 validators={{
-                  onBlur: ({ value }: { value: string }) => {
-                    if (!isValidEmail(value)) return "Nieprawidłowy email";
-
-                    return false;
+                  onSubmit: ({ value }: { value: string }) => {
+                    return !isValidEmail(value)
+                      ? "Nieprawidłowy email"
+                      : undefined;
                   },
                 }}
               >
                 {(field) => {
                   return (
                     <Input.Wrapper
-                      label="Hasło"
+                      label="Adres email"
                       error={
-                        field.state.meta.errors ? (
-                          <span className="mt-1 block">
+                        field.state.meta.errors.length ? (
+                          <span className="absolute mt-0 block">
                             {field.state.meta.errors}
                           </span>
-                        ) : null
+                        ) : (
+                          false
+                        )
                       }
                     >
                       <Input
                         value={field.state.value}
-                        onBlur={field.handleBlur}
                         onChange={(e) => {
                           field.handleChange(e.target.value);
+
+                          field.state.meta.errors = [];
                         }}
-                        error={Boolean(field.state.meta.errors.length)}
+                        error={!!field.state.meta.errors.length}
                       />
                     </Input.Wrapper>
                   );
@@ -89,11 +95,8 @@ export default function Login() {
               <form.Field
                 name="password"
                 validators={{
-                  onBlur: ({ value }: { value: string }) => {
-                    if (value.length) return false;
-
-                    return "Hasło jest wymagane";
-                  },
+                  onSubmit: ({ value }: { value: string }) =>
+                    value.length ? undefined : "Hasło jest wymagane",
                 }}
               >
                 {(field) => {
@@ -101,39 +104,45 @@ export default function Login() {
                     <Input.Wrapper
                       label="Hasło"
                       error={
-                        field.state.meta.errors ? (
-                          <span className="mt-1 block">
+                        field.state.meta.errors.length ? (
+                          <span className="absolute mt-1 block">
                             {field.state.meta.errors}
                           </span>
-                        ) : null
+                        ) : undefined
                       }
                     >
                       <PasswordInput
                         value={field.state.value}
-                        onBlur={field.handleBlur}
                         onChange={(e) => {
                           field.handleChange(e.target.value);
+
+                          field.state.meta.errors = [];
                         }}
-                        error={Boolean(field.state.meta.errors.length)}
+                        error={!!field.state.meta.errors.length}
                       />
                     </Input.Wrapper>
                   );
                 }}
               </form.Field>
 
-              <div>
-                <button
+              <div className="relative pb-10 flex flex-col mt-4">
+                <Button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  loading={isPending}
+                  className="min-w-full"
                 >
                   Zaloguj się
-                </button>
+                </Button>
+
+                <div className="h-5 text-sm mt-2 text-center text-red-500 block">
+                  {error && error?.message}
+                </div>
               </div>
             </form>
           </form.Provider>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Nie masz konta?{" "}
+            Nie masz konta?
             <a
               href="/register"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
@@ -142,7 +151,7 @@ export default function Login() {
             </a>
           </p>
 
-          <p className="mt-4 text-center text-xs text-gray-500">
+          {/* <p className="mt-4 text-center text-xs text-gray-500">
             Chcesz przetestować aplikację?{" "}
             <a
               href="#"
@@ -150,7 +159,7 @@ export default function Login() {
             >
               Rozpocznij w trybie demo
             </a>
-          </p>
+          </p> */}
         </div>
       </div>
     </>

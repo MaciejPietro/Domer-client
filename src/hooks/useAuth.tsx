@@ -1,10 +1,14 @@
+import useAuthStore from "@/store/authStore";
+
 export type AuthState = {
   isAuthenticated: boolean;
 };
 
 const useAuth = () => {
+  const { isAuth } = useAuthStore();
+
   return {
-    isAuthenticated: false,
+    isAuth,
   };
 };
 

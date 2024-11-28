@@ -3,7 +3,9 @@ import Dashboard from "../pages/Dashboard";
 
 export const Route = createFileRoute("/")({
   beforeLoad: ({ context }) => {
-    if (!context.auth.isAuthenticated) {
+    console.log("xdxd test", context.auth.isAuth);
+
+    if (!context.auth.isAuth) {
       throw redirect({
         to: "/login",
       });

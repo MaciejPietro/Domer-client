@@ -1,4 +1,4 @@
-import type { AuthState } from "@/hooks/useAuth";
+import type { AuthState } from "@/hooks/auth/useAuth";
 
 import { createRootRouteWithContext } from "@tanstack/react-router";
 

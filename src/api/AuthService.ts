@@ -1,15 +1,17 @@
-import type { LoginPayload } from "@/types/api";
+import type { LoginPayload, RegisterPayload } from "@/types/api";
 
 import axiosClient from "./apiClient";
+import { handleApiError } from "./utils";
 
 const AuthService = {
-  login: (values: LoginPayload) => {
+  login: async (values: LoginPayload) => {
     return axiosClient
-      .post("https://localhost:7123/api/identity/login", values)
-      .catch(() => {
-        throw new Error("Błędny email lub hasło");
-      });
+      .post(`/auth/login`, values)
+      .catch((err: unknown) => handleApiError(err, "Błędny email lub hasło"));
   },
+  register: async (values: RegisterPayload) =>
+    axiosClient.post(`/auth/register`, values).catch(handleApiError),
+  info: () => axiosClient.get(`/identity/manage/info`),
 };
 
 export default AuthService;

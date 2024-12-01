@@ -10,7 +10,6 @@ export default function Register() {
 
   const form = useForm({
     defaultValues: {
-      username: "",
       email: "",
       password: "",
       repeatPassword: "",
@@ -20,10 +19,6 @@ export default function Register() {
         email: value.email,
         password: value.password,
       };
-
-      if (value.username) {
-        formData.username = value.username;
-      }
 
       await mutateAsync(formData);
     },
@@ -54,38 +49,6 @@ export default function Register() {
               void form.handleSubmit();
             }}
           >
-            <form.Field
-              name="username"
-              validators={{
-                onSubmit: ({ value }: { value: string }) => {
-                  console.log("xdxd", value.length);
-
-                  if (value.length > 0 && value.length < 4)
-                    return "Nazwa użytkownika musi mieć conajmniej 4 znaki";
-                  return undefined;
-                },
-              }}
-            >
-              {(field) => (
-                <Input.Wrapper
-                  label="Nazwa użytkownika"
-                  error={
-                    field.state.meta.errors.length && (
-                      <FieldError errors={field.state.meta.errors} />
-                    )
-                  }
-                >
-                  <Input
-                    value={field.state.value}
-                    onChange={(e) => {
-                      field.handleChange(e.target.value);
-                    }}
-                    error={!!field.state.meta.errors.length}
-                  />
-                </Input.Wrapper>
-              )}
-            </form.Field>
-
             <form.Field
               name="email"
               validators={{

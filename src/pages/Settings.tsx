@@ -5,7 +5,7 @@ const Settings = () => {
     <Main>
       <div className="px-8">
         <h2 className="text-base font-semibold leading-7 text-gray-900">
-          Ustawienia kontnt
+          Ustawienia konta
         </h2>
         <p className="mt-1 text-sm leading-6 text-gray-400">
           Edytuj swoje ustawienia konta.
@@ -30,27 +30,6 @@ const Settings = () => {
               <p className="mt-2 text-xs leading-5 text-gray-400">
                 JPG, GIF or PNG. 1MB max.
               </p>
-            </div>
-          </div>
-
-          <div className="col-span-full">
-            <label
-              htmlFor="username"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              Nazwa użytkownika
-            </label>
-            <div className="mt-2">
-              <div className="flex rounded-md bg-black/5   ">
-                <input
-                  type="text"
-                  name="username"
-                  id="username"
-                  autoComplete="username"
-                  className="flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 focus:ring-0 sm:text-sm sm:leading-6 px-3"
-                  placeholder="janesmith"
-                />
-              </div>
             </div>
           </div>
 

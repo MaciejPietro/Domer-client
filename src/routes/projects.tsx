@@ -1,7 +1,7 @@
-import Dashboard from "../pages/Dashboard";
+import Projects from "../pages/Projects";
 import { withAuth } from "@/lib/router/helpers";
 
 export const Route = withAuth({
-  path: "/",
-  component: Dashboard,
+  path: "/projects",
+  component: Projects,
 });

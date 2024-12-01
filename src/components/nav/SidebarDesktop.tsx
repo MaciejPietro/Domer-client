@@ -3,14 +3,11 @@ import {
   InformationCircleIcon,
   FolderIcon,
   HomeIcon,
-  ArrowLeftStartOnRectangleIcon,
-  // UserIcon,
   Cog6ToothIcon,
-  UsersIcon,
 } from "@heroicons/react/24/outline";
 import { useRouterState } from "@tanstack/react-router";
-import Dialog from "../ui/Dialog";
 import { useState } from "react";
+import Logout from "../user/Logout";
 
 const navigation = [
   { name: "Panel", href: "/", icon: InformationCircleIcon, current: true },
@@ -107,26 +104,17 @@ const SidebarDesktop = () => {
               </ul>
             </li> */}
             <li className="-mx-6 mt-auto flex justify-between pr-4">
-              <div className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
+              <div className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50 text-xs">
                 <img
                   className="h-8 w-8 rounded-full bg-gray-50"
                   src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                   alt=""
                 />
-                <span aria-hidden="true">Tom Cook</span>
+                <span aria-hidden="true">youremail@com.pl</span>
               </div>
 
               <div className="flex items-center gap-2">
-                <button
-                  onClick={() => {
-                    setLogoutModal(true);
-                  }}
-                >
-                  <span className="sr-only">Log out</span>
-                  <ArrowLeftStartOnRectangleIcon className="text-gray-600 hover:text-gray-900 transition-colors w-6 h-6" />
-                </button>
-
-                <Dialog open={logoutModal} setOpen={setLogoutModal} />
+                <Logout />
 
                 <a href="/settings">
                   <span className="sr-only">Your profile</span>

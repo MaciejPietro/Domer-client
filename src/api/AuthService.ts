@@ -11,6 +11,7 @@ const AuthService = {
   },
   register: async (values: RegisterPayload) =>
     axiosClient.post(`/auth/register`, values).catch(handleApiError),
+  logout: () => axiosClient.post(`/auth/logout`),
   info: () => axiosClient.get(`/identity/manage/info`),
 };
 

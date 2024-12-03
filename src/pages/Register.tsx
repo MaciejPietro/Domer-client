@@ -42,8 +42,6 @@ export default function Register() {
           <form
             className="flex flex-col gap-5"
             onSubmit={(e) => {
-              console.log("xdxd");
-
               e.preventDefault();
               e.stopPropagation();
               void form.handleSubmit();

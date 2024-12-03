@@ -12,3 +12,8 @@ export type RegisterPayload = {
   email: string;
   password: string;
 };
+
+export type ConfirmEmailPayload = {
+  token: string;
+  email: string;
+};

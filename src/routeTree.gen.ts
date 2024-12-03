@@ -16,6 +16,7 @@ import { Route as RegisterImport } from './routes/register'
 import { Route as ProjectsImport } from './routes/projects'
 import { Route as ProjectImport } from './routes/project'
 import { Route as LoginImport } from './routes/login'
+import { Route as EmailconfirmImport } from './routes/emailconfirm'
 import { Route as CreatorImport } from './routes/creator'
 import { Route as IndexImport } from './routes/index'
 
@@ -46,6 +47,11 @@ const LoginRoute = LoginImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const EmailconfirmRoute = EmailconfirmImport.update({
+  path: '/emailconfirm',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const CreatorRoute = CreatorImport.update({
   path: '/creator',
   getParentRoute: () => rootRoute,
@@ -66,6 +72,10 @@ declare module '@tanstack/react-router' {
     }
     '/creator': {
       preLoaderRoute: typeof CreatorImport
+      parentRoute: typeof rootRoute
+    }
+    '/emailconfirm': {
+      preLoaderRoute: typeof EmailconfirmImport
       parentRoute: typeof rootRoute
     }
     '/login': {
@@ -96,6 +106,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
   CreatorRoute,
+  EmailconfirmRoute,
   LoginRoute,
   ProjectRoute,
   ProjectsRoute,

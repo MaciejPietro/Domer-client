@@ -12,23 +12,19 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as SettingsImport } from './routes/settings'
-import { Route as RegisterImport } from './routes/register'
 import { Route as ProjectsImport } from './routes/projects'
 import { Route as ProjectImport } from './routes/project'
-import { Route as LoginImport } from './routes/login'
-import { Route as EmailconfirmImport } from './routes/emailconfirm'
 import { Route as CreatorImport } from './routes/creator'
 import { Route as IndexImport } from './routes/index'
+import { Route as AuthThankyouImport } from './routes/auth/thankyou'
+import { Route as AuthRegisterImport } from './routes/auth/register'
+import { Route as AuthLoginImport } from './routes/auth/login'
+import { Route as AuthEmailconfirmImport } from './routes/auth/emailconfirm'
 
 // Create/Update Routes
 
 const SettingsRoute = SettingsImport.update({
   path: '/settings',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const RegisterRoute = RegisterImport.update({
-  path: '/register',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -42,16 +38,6 @@ const ProjectRoute = ProjectImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const LoginRoute = LoginImport.update({
-  path: '/login',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const EmailconfirmRoute = EmailconfirmImport.update({
-  path: '/emailconfirm',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const CreatorRoute = CreatorImport.update({
   path: '/creator',
   getParentRoute: () => rootRoute,
@@ -59,6 +45,26 @@ const CreatorRoute = CreatorImport.update({
 
 const IndexRoute = IndexImport.update({
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthThankyouRoute = AuthThankyouImport.update({
+  path: '/auth/thankyou',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthRegisterRoute = AuthRegisterImport.update({
+  path: '/auth/register',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthLoginRoute = AuthLoginImport.update({
+  path: '/auth/login',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthEmailconfirmRoute = AuthEmailconfirmImport.update({
+  path: '/auth/emailconfirm',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -74,14 +80,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CreatorImport
       parentRoute: typeof rootRoute
     }
-    '/emailconfirm': {
-      preLoaderRoute: typeof EmailconfirmImport
-      parentRoute: typeof rootRoute
-    }
-    '/login': {
-      preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
-    }
     '/project': {
       preLoaderRoute: typeof ProjectImport
       parentRoute: typeof rootRoute
@@ -90,12 +88,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsImport
       parentRoute: typeof rootRoute
     }
-    '/register': {
-      preLoaderRoute: typeof RegisterImport
-      parentRoute: typeof rootRoute
-    }
     '/settings': {
       preLoaderRoute: typeof SettingsImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/emailconfirm': {
+      preLoaderRoute: typeof AuthEmailconfirmImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/login': {
+      preLoaderRoute: typeof AuthLoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/register': {
+      preLoaderRoute: typeof AuthRegisterImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/thankyou': {
+      preLoaderRoute: typeof AuthThankyouImport
       parentRoute: typeof rootRoute
     }
   }
@@ -106,12 +116,13 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
   CreatorRoute,
-  EmailconfirmRoute,
-  LoginRoute,
   ProjectRoute,
   ProjectsRoute,
-  RegisterRoute,
   SettingsRoute,
+  AuthEmailconfirmRoute,
+  AuthLoginRoute,
+  AuthRegisterRoute,
+  AuthThankyouRoute,
 ])
 
 /* prettier-ignore-end */

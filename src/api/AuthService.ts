@@ -11,11 +11,14 @@ const AuthService = {
   },
   register: async (values: RegisterPayload) =>
     axiosClient
-      .post(`/auth/register`, { ...values, clientURI: window.location.origin })
+      .post(`/auth/register`, {
+        ...values,
+        clientURI: `${window.location.origin}/auth/emailconfirm`,
+      })
       .catch(handleApiError),
   logout: () => axiosClient.post(`/auth/logout`),
   confirmEmail: (token: string, email: string) =>
-    axiosClient.get(`/emailconfirmation?token=${token}&email=${email}`),
+    axiosClient.get(`/auth/emailconfirmation?token=${token}&email=${email}`),
   info: () => axiosClient.get(`/identity/manage/info`),
 };
 

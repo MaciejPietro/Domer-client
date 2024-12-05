@@ -2,7 +2,6 @@ import type { ApiResponse, RegisterPayload } from "@/types/api";
 
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import { toastSuccess } from "@/lib/toast";
 import AuthService from "@/api/AuthService";
 import { useNavigate } from "@tanstack/react-router";
 
@@ -21,10 +20,8 @@ const useRegister = () => {
     mutationKey: ["auth", "register"],
     mutationFn: AuthService.register,
     onSuccess: () => {
-      toastSuccess("Rejestracja przebiegła pomyślnie. Zaloguj się.");
-
       queueMicrotask(() => {
-        void navigate({ to: "/login" });
+        void navigate({ to: "/auth/thankyou" });
       });
     },
   });

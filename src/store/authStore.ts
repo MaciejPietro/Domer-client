@@ -1,7 +1,13 @@
 import { create } from "zustand";
 import AuthService from "@/api/AuthService";
 // Define the state interface
+type User = {
+  email: string;
+  isEmailConfirmed: boolean;
+};
+
 interface AuthState {
+  user: User | null;
   isAuth: boolean;
   isPending: boolean;
   setAuth: (value: boolean) => void;
@@ -9,6 +15,7 @@ interface AuthState {
 }
 
 const useAuthStore = create<AuthState>((set) => ({
+  user: null,
   isAuth: false,
   isPending: true,
   setAuth: (value: boolean) => {
@@ -17,11 +24,11 @@ const useAuthStore = create<AuthState>((set) => ({
     set(() => ({ isAuth: value }));
   },
   checkAuth: async () => {
-    // Call your API auth check endpoint here
     try {
-      const response = await AuthService.info(); // Example API call
-      console.log("xdxd chec", response);
-      set(() => ({ isAuth: true, isPending: false }));
+      const response = await AuthService.info();
+      console.log("xdxd res", response.data);
+
+      set(() => ({ isAuth: true, isPending: false, user: response.data }));
     } catch (error) {
       set(() => ({ isAuth: false, isPending: false }));
     }

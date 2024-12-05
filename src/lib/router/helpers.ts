@@ -1,12 +1,9 @@
 import {
   createFileRoute,
   redirect,
-  useRouteContext,
   type FileRoutesByPath,
   type RouteComponent,
 } from "@tanstack/react-router";
-import Login from "@/pages/Login";
-import useAuth from "@/hooks/auth/useAuth";
 
 export const withAuth = (route: {
   path: keyof FileRoutesByPath;
@@ -19,7 +16,7 @@ export const withAuth = (route: {
     beforeLoad: ({ context }) => {
       if (!context.auth.isAuth) {
         throw redirect({
-          to: "/login",
+          to: "/auth/login",
         });
       }
     },

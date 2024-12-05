@@ -20,7 +20,7 @@ const useLogout = () => {
       setAuth(false);
 
       queueMicrotask(() => {
-        void navigate({ to: "/login" });
+        void navigate({ to: "/auth/login" });
       });
     },
   });

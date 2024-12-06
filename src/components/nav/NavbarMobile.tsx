@@ -1,8 +1,4 @@
-import { Fragment, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import SidebarDesktop from "../components/nav/SidebarDesktop";
-import SidebarMobile from "../components/nav/SiedebarMobile";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 
 const NavbarMobile = ({ setSidebarOpen }: any) => {
   return (

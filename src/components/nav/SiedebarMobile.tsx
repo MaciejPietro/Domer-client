@@ -1,8 +1,5 @@
 import clsx from "clsx";
 import {
-  // CalendarIcon,
-  // ChartPieIcon,
-  // DocumentDuplicateIcon,
   FolderIcon,
   HomeIcon,
   // UserIcon,
@@ -11,15 +8,9 @@ import {
 const navigation = [
   { name: "SidebarMobile", href: "#", icon: HomeIcon, current: true },
   { name: "Projekty", href: "#", icon: FolderIcon, current: false },
-  // { name: "Usługi", href: "#", icon: UserIcon, current: false },
-  // { name: "Dokumenty", href: "#", icon: DocumentDuplicateIcon, current: false },
-  // { name: "Kalendarz", href: "#", icon: CalendarIcon, current: false },
-  // { name: "Raporty", href: "#", icon: ChartPieIcon, current: false },
 ];
 const teams = [
   { id: 1, name: "Inspiracje", href: "#", initial: "I", current: false },
-  // { id: 2, name: "Tailwind Labs", href: "#", initial: "T", current: false },
-  // { id: 3, name: "Workcation", href: "#", initial: "W", current: false },
 ];
 
 const SidebarMobile = () => {

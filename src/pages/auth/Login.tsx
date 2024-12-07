@@ -1,13 +1,14 @@
 import { useForm } from "@tanstack/react-form";
 import { Link } from "@tanstack/react-router";
 
-import type { LoginPayload } from "@/types/api";
+import type { LoginPayload } from "@/Auth/types";
 import { Button, Input, PasswordInput } from "@mantine/core";
-import useLogin from "@/hooks/auth/useLogin";
+import useLogin from "@/Auth/hooks/useLogin";
 
-import FieldError from "@/components/form/validation/FieldError";
-import { isValidEmail } from "@/utils/helpers";
-import AuthLayout from "@/layouts/AuthLayout";
+import { isValidEmail } from "@/Common/utils/helpers";
+import Layout from "@/Auth/Layout";
+
+import FieldError from "@/Common/components/form/FieldError";
 
 export default function Login() {
   const { mutateAsync, isPending, error } = useLogin();
@@ -21,7 +22,7 @@ export default function Login() {
   });
 
   return (
-    <AuthLayout title="Logowanie">
+    <Layout title="Logowanie">
       <form.Provider>
         <form
           className="flex flex-col gap-5"
@@ -121,6 +122,6 @@ export default function Login() {
               Rozpocznij w trybie demo
             </a>
           </p> */}
-    </AuthLayout>
+    </Layout>
   );
 }

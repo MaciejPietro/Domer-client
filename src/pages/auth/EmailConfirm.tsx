@@ -1,5 +1,5 @@
-import useConfirmEmail from "@/hooks/auth/useConfirmEmail";
-import AuthLayout from "@/layouts/AuthLayout";
+import useConfirmEmail from "@/Auth/hooks/useConfirmEmail";
+import Layout from "@/Auth/Layout";
 import type { ConfirmEmailSearchParams } from "@/routes/auth/emailconfirm";
 import { Button } from "@mantine/core";
 import { Link, useSearch } from "@tanstack/react-router";
@@ -20,7 +20,7 @@ export default function EmailConfirm() {
   }, [search, mutateAsync]);
 
   return (
-    <AuthLayout title="Potwierdzenie adresu email">
+    <Layout title="Potwierdzenie adresu email">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <p className="text-center tracking-tight text-gray-900 text-lg">
           Twój email został potwierdzony, możesz się zalogować
@@ -34,6 +34,6 @@ export default function EmailConfirm() {
           </Link>
         </div>
       </div>
-    </AuthLayout>
+    </Layout>
   );
 }

@@ -1,5 +1,5 @@
 import Creator from "../pages/Creator";
-import { withAuth } from "@/lib/router/helpers";
+import { withAuth } from "@/Common/lib/router/helpers";
 
 export const Route = withAuth({
   path: "/creator",

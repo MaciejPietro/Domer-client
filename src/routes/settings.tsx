@@ -1,6 +1,6 @@
 import Settings from "../pages/Settings";
 
-import { withAuth } from "@/lib/router/helpers";
+import { withAuth } from "@/Common/lib/router/helpers";
 
 export const Route = withAuth({
   path: "/settings",

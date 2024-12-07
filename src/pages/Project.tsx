@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ProjectDetails from "../components/ProjectDetails";
-import Main from "../components/layout/Main";
+import ProjectDetails from "@/Common/components/ProjectDetails";
+import Main from "@/Common/components/layout/Main";
 import clsx from "clsx";
 
 type Tab = "Ogólne" | "Rzuty" | "Dane techniczne";
@@ -34,7 +34,6 @@ const Tabs = ({ setTab, tab }: any) => {
           className="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
           defaultValue={tab}
           onChange={(e) => {
-            console.log("xdxd", e);
             setTab(e.target.value);
           }}
         >

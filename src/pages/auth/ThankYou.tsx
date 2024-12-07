@@ -1,10 +1,10 @@
-import AuthLayout from "@/layouts/AuthLayout";
+import Layout from "@/Auth/Layout";
 import { Button } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 
 const ThankYou = () => {
   return (
-    <AuthLayout title="Dziękujemy za rejestrację!">
+    <Layout title="Dziękujemy za rejestrację!">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <p className="text-center tracking-tight text-gray-900 text-lg">
           Sprawdź swoją pocztę, aby w aktywować konto. Dzięki temu możesz
@@ -19,7 +19,7 @@ const ThankYou = () => {
           </Link>
         </div>
       </div>
-    </AuthLayout>
+    </Layout>
   );
 };
 

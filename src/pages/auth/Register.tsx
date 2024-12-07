@@ -1,11 +1,13 @@
 import { useForm } from "@tanstack/react-form";
-import { Button, Input, PasswordInput } from "@mantine/core";
-import FieldError from "@/components/form/validation/FieldError";
-import useRegister from "@/hooks/auth/useRegister";
-import type { RegisterPayload } from "@/types/api";
-import { isValidEmail } from "@/utils/helpers";
-import AuthLayout from "@/layouts/AuthLayout";
+import { Button, PasswordInput } from "@mantine/core";
+import useRegister from "@/Auth/hooks/useRegister";
+import { isValidEmail } from "@/Common/utils/helpers";
+import Layout from "@/Auth/Layout";
+
 import { Link } from "@tanstack/react-router";
+import type { RegisterPayload } from "@/Auth/types";
+import FieldError from "@/Common/components/form/FieldError";
+import Input from "@/Common/components/form/fields/Input";
 
 export default function Register() {
   const { mutateAsync, isPending, error } = useRegister();
@@ -27,7 +29,7 @@ export default function Register() {
   });
 
   return (
-    <AuthLayout title="Rejestracja">
+    <Layout title="Rejestracja">
       <form.Provider>
         <form
           className="flex flex-col gap-5"
@@ -152,6 +154,6 @@ export default function Register() {
           Zaloguj się
         </Link>
       </p>
-    </AuthLayout>
+    </Layout>
   );
 }

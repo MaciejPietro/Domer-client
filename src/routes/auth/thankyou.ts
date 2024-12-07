@@ -1,7 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
-
 import ThankYou from "@/pages/auth/ThankYou";
+import { withUnauth } from "@/Common/lib/router/helpers";
 
-export const Route = createFileRoute("/auth/thankyou")({
+export const Route = withUnauth({
+  path: "/auth/thankyou",
   component: ThankYou,
 });

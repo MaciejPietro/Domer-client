@@ -2,32 +2,45 @@ import Main from "@/Common/components/layout/Main";
 import { isValidEmail } from "@/Common/utils/helpers";
 import ConfirmEmailField from "@/User/components/settings/ConfirmEmailField";
 import EmailField from "@/User/components/settings/EmailField";
+import PasswordField from "@/User/components/settings/PasswordField";
 import useUpdateUser from "@/User/hooks/useUpdateUser";
 import useUser from "@/User/hooks/useUser";
 import type { UpdateUserPayload } from "@/User/types";
 import { Button } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
-import { useMemo } from "react";
+
+export type SettingsForm = {
+  email: string;
+  currentPassword: string;
+  password: string;
+  repeatPassword: string;
+};
 
 const Settings = () => {
   const user = useUser();
   const { mutateAsync, isPending, error } = useUpdateUser();
 
-  const defaultValues = useMemo(() => {
-    return {
+  const form = useForm<SettingsForm>({
+    defaultValues: {
       email: user.email,
-    };
-  }, [user]);
-
-  const form = useForm({
-    defaultValues,
+      currentPassword: "",
+      password: "",
+      repeatPassword: "",
+    },
     onSubmit: async ({ value }) => {
       const formData: UpdateUserPayload = {
         email: value.email,
         id: user.id,
       };
 
-      await mutateAsync(formData);
+      if (value.password && value.repeatPassword && value.currentPassword) {
+        formData.currentPassword = value.currentPassword;
+        formData.password = value.password;
+      }
+
+      console.log(formData);
+
+      // await mutateAsync(formData);
     },
   });
 
@@ -52,29 +65,22 @@ const Settings = () => {
               void form.handleSubmit();
             }}
           >
-            <form.Field
-              name="email"
-              validators={{
-                onSubmit: ({ value }: { value: string }) => {
-                  if (!value) return "Adres email jest wymagany";
-                  if (!isValidEmail(value)) return "Nieprawidłowy adresemail";
-                  return undefined;
-                },
-              }}
-            >
-              {(field) => <EmailField field={field} />}
-            </form.Field>
+            <EmailField form={form} />
+            <PasswordField form={form} />
 
             <div className="relative pb-10 flex flex-col mt-4">
               <div>
                 <form.Subscribe
                   selector={(state) => {
-                    const hasDifferentValues =
-                      state.values.email !== user.email;
+                    const hasDifferentEmail = state.values.email !== user.email;
 
-                    return [hasDifferentValues];
+                    const hasPasswordChange =
+                      state.values.currentPassword &&
+                      state.values.password === state.values.repeatPassword;
+
+                    return hasDifferentEmail || hasPasswordChange;
                   }}
-                  children={([canSubmit]) => (
+                  children={(canSubmit) => (
                     <Button
                       type="submit"
                       className="w-max"

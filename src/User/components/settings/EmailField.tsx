@@ -1,43 +1,29 @@
 import EditBtn from "@/Common/components/form/EditBtn";
-import FieldError from "@/Common/components/form/FieldError";
-import Input from "@/Common/components/form/fields/Input";
+import EmailInput from "@/Common/components/form/fields/EmailInput";
+import type { SettingsForm } from "@/pages/Settings";
+import useUser from "@/User/hooks/useUser";
+import type { FormApi } from "@tanstack/react-form";
 
 import { useToggle } from "usehooks-ts";
 
-const EmailField = ({ field }: any) => {
+type ComponentProps = {
+  form: FormApi<SettingsForm, undefined>;
+};
+
+const EmailField = ({ form }: ComponentProps) => {
+  const user = useUser();
   const [isEditing, toggleEditing] = useToggle(false);
 
   return (
-    <div className="col-span-full">
-      <div className="mt-2 relative">
-        <Input.Wrapper
-          label="Adres email"
-          required
-          error={
-            field.state.meta.errors.length && (
-              <FieldError errors={field.state.meta.errors} />
-            )
-          }
-        >
-          <div className="relative">
-            <Input
-              value={field.state.value}
-              onChange={(e) => {
-                field.handleChange(e.target.value);
-              }}
-              error={!!field.state.meta.errors.length}
-              disabled={!isEditing}
-            />
-            <EditBtn
-              isEditing={isEditing}
-              toggleEditing={toggleEditing}
-              restoreValue={() => {
-                field.handleChange(field.state.initialValue);
-              }}
-            />
-          </div>
-        </Input.Wrapper>
-      </div>
+    <div className="relative">
+      <EmailInput form={form} disabled={!isEditing} />
+      <EditBtn
+        isEditing={isEditing}
+        toggleEditing={toggleEditing}
+        restoreValue={() => {
+          form.setFieldValue("email", user.email);
+        }}
+      />
     </div>
   );
 };

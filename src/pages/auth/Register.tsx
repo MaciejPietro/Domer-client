@@ -1,5 +1,5 @@
 import { useForm } from "@tanstack/react-form";
-import { Button, PasswordInput } from "@mantine/core";
+import { Button } from "@mantine/core";
 import useRegister from "@/Auth/hooks/useRegister";
 import { isValidEmail } from "@/Common/utils/helpers";
 import Layout from "@/Auth/Layout";
@@ -8,6 +8,8 @@ import { Link } from "@tanstack/react-router";
 import type { RegisterPayload } from "@/Auth/types";
 import FieldError from "@/Common/components/form/FieldError";
 import Input from "@/Common/components/form/fields/Input";
+import PasswordInput from "@/Common/components/form/fields/PasswordInput";
+import EmailInput from "@/Common/components/form/fields/EmailInput";
 
 export default function Register() {
   const { mutateAsync, isPending, error } = useRegister();
@@ -39,99 +41,15 @@ export default function Register() {
             void form.handleSubmit();
           }}
         >
-          <form.Field
-            name="email"
-            validators={{
-              onSubmit: ({ value }: { value: string }) => {
-                if (!value) return "Adres email jest wymagany";
-                if (!isValidEmail(value)) return "Nieprawidłowy email";
-                return undefined;
-              },
-            }}
-          >
-            {(field) => (
-              <Input.Wrapper
-                label="Adres email"
-                required
-                error={
-                  field.state.meta.errors.length && (
-                    <FieldError errors={field.state.meta.errors} />
-                  )
-                }
-              >
-                <Input
-                  value={field.state.value}
-                  onChange={(e) => {
-                    field.handleChange(e.target.value);
-                  }}
-                  error={!!field.state.meta.errors.length}
-                />
-              </Input.Wrapper>
-            )}
-          </form.Field>
+          <EmailInput form={form} />
 
-          <form.Field
-            name="password"
-            validators={{
-              onSubmit: ({ value }: { value: string }) => {
-                if (value.length < 8)
-                  return "Hasło musi mieć conajmniej 8 znaków";
-                return undefined;
-              },
-            }}
-          >
-            {(field) => (
-              <Input.Wrapper
-                label="Hasło"
-                required
-                error={
-                  field.state.meta.errors.length && (
-                    <FieldError errors={field.state.meta.errors} />
-                  )
-                }
-              >
-                <PasswordInput
-                  value={field.state.value}
-                  onChange={(e) => {
-                    field.handleChange(e.target.value);
-                  }}
-                  error={!!field.state.meta.errors.length}
-                />
-              </Input.Wrapper>
-            )}
-          </form.Field>
+          <PasswordInput form={form} name="password" label="Hasło" />
 
-          <form.Field
+          <PasswordInput
+            form={form}
             name="repeatPassword"
-            validators={{
-              onChange: ({ value }: { value: string }) => {
-                if (!value) return "Powtórzone hasło jest wymagane";
-                if (value !== form.getFieldValue("password"))
-                  return "Hasła nie są takie same";
-                return undefined;
-              },
-            }}
-          >
-            {(field) => (
-              <Input.Wrapper
-                label="Powtórz hasło"
-                required
-                error={
-                  field.state.meta.errors.length && (
-                    <FieldError errors={field.state.meta.errors} />
-                  )
-                }
-              >
-                <PasswordInput
-                  value={field.state.value}
-                  onChange={(e) => {
-                    field.handleChange(e.target.value);
-                  }}
-                  error={!!field.state.meta.errors.length}
-                />
-              </Input.Wrapper>
-            )}
-          </form.Field>
+            label="Powtórz hasło"
+          />
 
           <div className="relative pb-10 flex flex-col mt-4">
             <Button type="submit" loading={isPending} className="min-w-full">

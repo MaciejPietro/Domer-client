@@ -14,7 +14,7 @@ const EditBtn = ({
   return (
     <button
       type="button"
-      className="absolute right-2 top-1/2 -translate-y-1/2 z-10 cursor-pointer"
+      className="absolute -right-8 bottom-5 z-10 cursor-pointer"
       onClick={toggleEditing}
     >
       {isEditing ? (

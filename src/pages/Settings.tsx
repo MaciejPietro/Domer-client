@@ -1,5 +1,4 @@
 import Main from "@/Common/components/layout/Main";
-import { isValidEmail } from "@/Common/utils/helpers";
 import ConfirmEmailField from "@/User/components/settings/ConfirmEmailField";
 import EmailField from "@/User/components/settings/EmailField";
 import PasswordField from "@/User/components/settings/PasswordField";
@@ -8,6 +7,7 @@ import useUser from "@/User/hooks/useUser";
 import type { UpdateUserPayload } from "@/User/types";
 import { Button } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
+import { useState } from "react";
 
 export type SettingsForm = {
   email: string;
@@ -19,8 +19,10 @@ export type SettingsForm = {
 const Settings = () => {
   const user = useUser();
   const { mutateAsync, isPending, error } = useUpdateUser();
+  const [formKey, setFormKey] = useState(0);
 
   const form = useForm<SettingsForm>({
+    key: formKey,
     defaultValues: {
       email: user.email,
       currentPassword: "",
@@ -29,18 +31,21 @@ const Settings = () => {
     },
     onSubmit: async ({ value }) => {
       const formData: UpdateUserPayload = {
-        email: value.email,
         id: user.id,
       };
+
+      if (value.email !== user.email) {
+        formData.email = value.email;
+      }
 
       if (value.password && value.repeatPassword && value.currentPassword) {
         formData.currentPassword = value.currentPassword;
         formData.password = value.password;
       }
 
-      console.log(formData);
-
-      // await mutateAsync(formData);
+      await mutateAsync(formData);
+      setFormKey((prev) => prev + 1);
+      form.reset();
     },
   });
 
@@ -58,6 +63,7 @@ const Settings = () => {
       <div className="md:col-span-2 px-8 my-8">
         <form.Provider>
           <form
+            key={formKey}
             className="flex flex-col gap-5 max-w-xl"
             onSubmit={(e) => {
               e.preventDefault();
@@ -76,7 +82,8 @@ const Settings = () => {
 
                     const hasPasswordChange =
                       state.values.currentPassword &&
-                      state.values.password === state.values.repeatPassword;
+                      state.values.password &&
+                      state.values.repeatPassword;
 
                     return hasDifferentEmail || hasPasswordChange;
                   }}
@@ -93,7 +100,7 @@ const Settings = () => {
                 />
               </div>
 
-              <div className="h-5 text-sm mt-2 text-center text-red-500 block">
+              <div className="h-5 text-sm mt-2 text-red-500 block">
                 {error && error?.message}
               </div>
             </div>

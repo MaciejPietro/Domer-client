@@ -1,4 +1,4 @@
-import { ArrowPathIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import { PencilSquareIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 type ComponentProps = {
   isEditing: boolean;
@@ -14,11 +14,11 @@ const EditBtn = ({
   return (
     <button
       type="button"
-      className="absolute -right-8 bottom-5 z-10 cursor-pointer"
+      className="absolute -right-8 bottom-3 z-10 cursor-pointer transition-colors p-1 rounded hover:bg-gray-100"
       onClick={toggleEditing}
     >
       {isEditing ? (
-        <ArrowPathIcon className="w-4 h-4 " onClick={restoreValue} />
+        <XMarkIcon className="w-4 h-4 " onClick={restoreValue} />
       ) : (
         <PencilSquareIcon className="w-4 h-4 cursor-pointer" />
       )}

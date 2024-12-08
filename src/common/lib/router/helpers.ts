@@ -23,11 +23,13 @@ export const withAuth = (route: {
   });
 };
 
-export const withUnauth = (route: {
+type RouteProps = {
   path: keyof FileRoutesByPath;
   component: RouteComponent<any>;
   beforeLoad?: (args: { search: Record<string, string> }) => void;
-}) => {
+};
+
+export const withUnauth = (route: RouteProps) => {
   return createFileRoute(route.path)({
     component: route.component,
 
@@ -39,6 +41,17 @@ export const withUnauth = (route: {
           to: "/",
         });
       }
+    },
+    pendingMinMs: 0,
+  });
+};
+
+export const publicRoute = (route: RouteProps) => {
+  return createFileRoute(route.path)({
+    component: route.component,
+
+    beforeLoad: ({ search }) => {
+      route.beforeLoad?.({ search });
     },
     pendingMinMs: 0,
   });

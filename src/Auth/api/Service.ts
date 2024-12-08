@@ -13,15 +13,10 @@ export default {
     axiosClient
       .post(`/auth/register`, {
         ...values,
-        clientURI: `${window.location.origin}/auth/emailconfirm`,
+        clientUri: `${window.location.origin}/auth/emailconfirm`,
       })
       .catch(handleApiError),
   logout: () => axiosClient.post(`/auth/logout`),
   confirmEmail: (token: string, email: string) =>
     axiosClient.get(`/auth/emailconfirmation?token=${token}&email=${email}`),
-  resendEmailConfirmation: (email: string) =>
-    axiosClient.post(`/auth/resend-emailconfirmation`, {
-      email,
-      clientURI: `${window.location.origin}/auth/emailconfirm`,
-    }),
 };

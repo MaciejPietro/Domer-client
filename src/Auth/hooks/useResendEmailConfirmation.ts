@@ -1,10 +1,9 @@
-import type { ApiResponse } from "@/Auth/types";
-
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import AuthService from "@/Auth/api/Service";
+import UserService from "@/User/api/Service";
 import { toastSuccess } from "@/Common/lib/toast";
 import useUser from "@/User/hooks/useUser";
+import type { ApiResponse } from "@/Common/api/types";
 
 const useResendEmailConfirmation = () => {
   const user = useUser();
@@ -15,7 +14,7 @@ const useResendEmailConfirmation = () => {
 
   return useMutation<ApiResponse, AxiosError<string, any>>({
     mutationKey: ["auth", "resendEmailConfirmation"],
-    mutationFn: () => AuthService.resendEmailConfirmation(user?.email),
+    mutationFn: () => UserService.resendEmailConfirmation(user?.email),
     onSuccess: () => {
       toastSuccess("Email został wysłany ponownie.");
     },

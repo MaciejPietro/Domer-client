@@ -4,3 +4,8 @@ export type UpdateUserPayload = {
   currentPassword?: string;
   password?: string;
 };
+
+export type DeleteAccountPayload = {
+  id: string;
+  password: string;
+};

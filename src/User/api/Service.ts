@@ -1,4 +1,4 @@
-import type { UpdateUserPayload } from "../types";
+import type { DeleteAccountPayload, UpdateUserPayload } from "../types";
 import axiosClient from "./Client";
 import { handleApiError } from "@/Common/api/utils";
 
@@ -16,5 +16,7 @@ export default {
       })
       .catch((err: unknown) => handleApiError(err, "Coś poszło nie tak"));
   },
-  info: () => axiosClient.get(`/user/current`),
+  delete: async (values: DeleteAccountPayload) =>
+    axiosClient.delete(`/user`, { data: values }),
+  info: () => axiosClient.get(`/user`),
 };

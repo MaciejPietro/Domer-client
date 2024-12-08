@@ -3,11 +3,10 @@ import {
   InformationCircleIcon,
   FolderIcon,
   HomeIcon,
-  Cog6ToothIcon,
 } from "@heroicons/react/24/outline";
-import { useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import useUser from "@/User/hooks/useUser";
-import Logout from "@/Common/components/user/Logout";
+import Logout from "@/Auth/components/Logout";
 
 const navigation = [
   { name: "Panel", href: "/", icon: InformationCircleIcon, current: true },
@@ -62,22 +61,18 @@ const SidebarDesktop = () => {
               </ul>
             </li>
 
-            <li className="-mx-6 mt-auto flex justify-between pr-4">
-              <div className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50 text-xs">
-                <img
-                  className="h-8 w-8 rounded-full bg-gray-50 "
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                  alt=""
-                />
-                <span className="truncate w-40">{user?.email}</span>
-              </div>
+            <li className="-mx-6 mt-auto flex justify-between border-t border-gray-200">
+              <Link
+                to="/settings"
+                className="w-full flex items-center gap-x-3 px-6 h-14 font-semibold leading-6 text-gray-900 hover:bg-gray-50 text-xs"
+              >
+                <div className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center uppercase text-gray-400">
+                  {user.email[0]}
+                </div>
+                <span className="truncate w-36">{user.email}</span>
+              </Link>
 
-              <div className="flex items-center gap-2">
-                <a href="/settings">
-                  <span className="sr-only">Your profile</span>
-                  <Cog6ToothIcon className="text-gray-600 hover:text-gray-900 transition-colors w-6 h-6" />
-                </a>
-
+              <div className="flex items-center gap-2  ">
                 <Logout />
               </div>
             </li>

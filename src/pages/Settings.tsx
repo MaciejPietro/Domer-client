@@ -1,5 +1,6 @@
 import Main from "@/Common/components/layout/Main";
 import ConfirmEmailField from "@/User/components/settings/ConfirmEmailField";
+import DeleteAccount from "@/User/components/settings/DeleteAccount";
 import EmailField from "@/User/components/settings/EmailField";
 import PasswordField from "@/User/components/settings/PasswordField";
 import useUpdateUser from "@/User/hooks/useUpdateUser";
@@ -22,7 +23,6 @@ const Settings = () => {
   const [formKey, setFormKey] = useState(0);
 
   const form = useForm<SettingsForm>({
-    key: formKey,
     defaultValues: {
       email: user.email,
       currentPassword: "",
@@ -112,26 +112,8 @@ const Settings = () => {
         <ConfirmEmailField />
       </div>
 
-      <div className="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8 border-t border-gray-300">
-        <div>
-          <h2 className="text-base font-semibold leading-7 text-gray-900">
-            Delete account
-          </h2>
-          <p className="mt-1 text-sm leading-6 text-gray-400">
-            No longer want to use our service? You can delete your account here.
-            This action is not reversible. All information related to this
-            account will be deleted permanently.
-          </p>
-        </div>
-
-        <form className="flex items-start md:col-span-2">
-          <button
-            type="submit"
-            className="rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-400"
-          >
-            Yes, delete my account
-          </button>
-        </form>
+      <div className="p-8 border-t border-gray-300">
+        <DeleteAccount />
       </div>
     </Main>
   );

@@ -7,9 +7,6 @@ const ProjectDetails = () => {
         alt=""
       />
       <div className="flex flex-col gap-2  px-4 py-4  sm:px-6 lg:px-8">
-        {/* <div className=" rounded-full w-max bg-indigo-400/10 px-2 py-1 text-xs font-medium text-indigo-400 ring-1 ring-inset ring-indigo-400/30 sm:order-none">
-              Parterówka
-            </div> */}
         <div>
           <div className="flex items-center gap-x-3">
             <div className="flex-none rounded-full bg-green-400/10 p-1 text-green-400">

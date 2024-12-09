@@ -30,7 +30,6 @@ const ContactsList = () => {
     setChecked(selectedProjects.length === projects.length);
     setIndeterminate(isIndeterminate);
     if (checkbox.current) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       (checkbox.current as any).indeterminate = isIndeterminate;
     }
   }, [selectedProjects]);

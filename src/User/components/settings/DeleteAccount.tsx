@@ -5,6 +5,7 @@ import { useForm } from "@tanstack/react-form";
 import PasswordInput from "@/Common/components/form/fields/PasswordInput";
 import useDeleteAccount from "@/User/hooks/useDeleteAccount";
 import useUser from "@/User/hooks/useUser";
+import FormError from "@/Common/components/form/FormError";
 
 const DeleteAccount = () => {
   const user = useUser();
@@ -71,9 +72,7 @@ const DeleteAccount = () => {
             <PasswordInput form={form} name={"password"} label={"Hasło"} />
 
             <div className="relative flex flex-col mt-3">
-              <div className="h-5 text-sm mb-2  text-red-500 block">
-                {error && error.response?.data && error.response.data}
-              </div>
+              <FormError error={error} />
 
               <div className="space-x-4">
                 <Button type="submit" color="red" loading={isPending}>

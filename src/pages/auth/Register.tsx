@@ -10,6 +10,7 @@ import FieldError from "@/Common/components/form/FieldError";
 import Input from "@/Common/components/form/fields/Input";
 import PasswordInput from "@/Common/components/form/fields/PasswordInput";
 import EmailInput from "@/Common/components/form/fields/EmailInput";
+import FormError from "@/Common/components/form/FormError";
 
 export default function Register() {
   const { mutateAsync, isPending, error } = useRegister();
@@ -56,9 +57,7 @@ export default function Register() {
               Zarejestruj się
             </Button>
 
-            <div className="h-5 text-sm mt-2 text-center text-red-500 block">
-              {error && error?.message}
-            </div>
+            <FormError error={error} />
           </div>
         </form>
       </form.Provider>

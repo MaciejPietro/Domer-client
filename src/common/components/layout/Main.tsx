@@ -8,7 +8,7 @@ const Main = ({ children }: any) => {
 
       <SidebarDesktop />
 
-      <main className="lg:pl-72 max-h-screen overflow-y-scroll">
+      <main className="lg:pl-72 max-h-screen overflow-y-auto">
         <div className="py-10 lg:py-6">{children}</div>
       </main>
     </div>

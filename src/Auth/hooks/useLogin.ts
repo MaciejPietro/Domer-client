@@ -23,8 +23,6 @@ const useLogin = () => {
     onSuccess: (response) => {
       toastSuccess("Logowanie przebiegło pomyślnie");
 
-      console.log("xdxd", response.data);
-
       setAuth(true);
       setUser(response.data);
 

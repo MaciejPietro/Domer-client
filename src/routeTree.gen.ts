@@ -15,8 +15,12 @@ import { Route as SettingsImport } from './routes/settings'
 import { Route as ProjectsImport } from './routes/projects'
 import { Route as ProjectImport } from './routes/project'
 import { Route as CreatorImport } from './routes/creator'
+import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as AuthThankyouImport } from './routes/auth/thankyou'
+import { Route as AuthResetpasswordsentImport } from './routes/auth/resetpasswordsent'
+import { Route as AuthResetpasswordImport } from './routes/auth/resetpassword'
+import { Route as AuthRemindpasswordImport } from './routes/auth/remindpassword'
 import { Route as AuthRegisterImport } from './routes/auth/register'
 import { Route as AuthLoginImport } from './routes/auth/login'
 import { Route as AuthEmailconfirmImport } from './routes/auth/emailconfirm'
@@ -43,6 +47,11 @@ const CreatorRoute = CreatorImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const AboutRoute = AboutImport.update({
+  path: '/about',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
@@ -50,6 +59,21 @@ const IndexRoute = IndexImport.update({
 
 const AuthThankyouRoute = AuthThankyouImport.update({
   path: '/auth/thankyou',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthResetpasswordsentRoute = AuthResetpasswordsentImport.update({
+  path: '/auth/resetpasswordsent',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthResetpasswordRoute = AuthResetpasswordImport.update({
+  path: '/auth/resetpassword',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthRemindpasswordRoute = AuthRemindpasswordImport.update({
+  path: '/auth/remindpassword',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -74,6 +98,10 @@ declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/about': {
+      preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
     '/creator': {
@@ -104,6 +132,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRegisterImport
       parentRoute: typeof rootRoute
     }
+    '/auth/remindpassword': {
+      preLoaderRoute: typeof AuthRemindpasswordImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/resetpassword': {
+      preLoaderRoute: typeof AuthResetpasswordImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/resetpasswordsent': {
+      preLoaderRoute: typeof AuthResetpasswordsentImport
+      parentRoute: typeof rootRoute
+    }
     '/auth/thankyou': {
       preLoaderRoute: typeof AuthThankyouImport
       parentRoute: typeof rootRoute
@@ -115,6 +155,7 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
+  AboutRoute,
   CreatorRoute,
   ProjectRoute,
   ProjectsRoute,
@@ -122,6 +163,9 @@ export const routeTree = rootRoute.addChildren([
   AuthEmailconfirmRoute,
   AuthLoginRoute,
   AuthRegisterRoute,
+  AuthRemindpasswordRoute,
+  AuthResetpasswordRoute,
+  AuthResetpasswordsentRoute,
   AuthThankyouRoute,
 ])
 

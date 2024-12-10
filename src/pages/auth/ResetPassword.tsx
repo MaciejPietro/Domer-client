@@ -1,29 +1,44 @@
 import { useForm } from "@tanstack/react-form";
-import { Link } from "@tanstack/react-router";
+import { Link, useSearch } from "@tanstack/react-router";
 
-import type { LoginPayload } from "@/Auth/types";
+import type { ResetPasswordPayload } from "@/Auth/types";
 import { Button } from "@mantine/core";
-import useLogin from "@/Auth/hooks/useLogin";
 
 import Layout from "@/Auth/Layout";
 
 import PasswordInput from "@/Common/components/form/fields/PasswordInput";
-import EmailInput from "@/Common/components/form/fields/EmailInput";
 import FormError from "@/Common/components/form/FormError";
+import useResetPassword from "@/Auth/hooks/useResetPassword";
+import type { ResetPasswordSearchParams } from "@/routes/auth/resetpassword";
 
-export default function Login() {
-  const { mutateAsync, isPending, error } = useLogin();
+export default function ResetPassword() {
+  const search: Required<ResetPasswordSearchParams> = useSearch({
+    strict: false,
+  });
 
-  const form = useForm<LoginPayload>({
+  const { mutateAsync, isPending, error } = useResetPassword();
+
+  const form = useForm<{
+    password: string;
+    repeatPassword: string;
+  }>({
     defaultValues: {
-      email: "admin@admin.pl",
-      password: "House@09!",
+      password: "",
+      repeatPassword: "",
     },
-    onSubmit: ({ value }) => mutateAsync(value),
+    onSubmit: async ({ value }) => {
+      const formData: ResetPasswordPayload = {
+        password: value.password,
+        email: search.email,
+        token: search.token,
+      };
+
+      await mutateAsync(formData);
+    },
   });
 
   return (
-    <Layout title="Logowanie">
+    <Layout title="Zmiana hasła">
       <form.Provider>
         <form
           className="flex flex-col gap-5"
@@ -33,21 +48,17 @@ export default function Login() {
             void form.handleSubmit();
           }}
         >
-          <EmailInput form={form} />
+          <PasswordInput form={form} name="password" label="Nowe hasło" />
 
-          <div className="relative">
-            <PasswordInput form={form} name="password" label="Hasło" />
-            <Link
-              to="/auth/remindpassword"
-              className="text-xs absolute right-0 text-gray-400 hover:text-gray-500"
-            >
-              Zresetuj hasło
-            </Link>
-          </div>
+          <PasswordInput
+            form={form}
+            name="repeatPassword"
+            label="Powtórz nowe hasło"
+          />
 
           <div className="relative pb-10 flex flex-col mt-4">
             <Button type="submit" loading={isPending} className="min-w-full">
-              Zaloguj się
+              Zmień hasło
             </Button>
 
             <FormError error={error} />
@@ -56,12 +67,11 @@ export default function Login() {
       </form.Provider>
 
       <p className="mt-10 text-center text-sm text-gray-500">
-        Nie masz konta?
         <Link
-          to="/auth/register"
-          className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+          to="/auth/login"
+          className="leading-6 text-gray-500 hover:text-gray-600"
         >
-          Zarejestruj się
+          Wróć do logowania
         </Link>
       </p>
 

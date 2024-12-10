@@ -1,3 +1,4 @@
+import FormError from "@/Common/components/form/FormError";
 import Main from "@/Common/components/layout/Main";
 import ConfirmEmailField from "@/User/components/settings/ConfirmEmailField";
 import DeleteAccount from "@/User/components/settings/DeleteAccount";
@@ -100,9 +101,7 @@ const Settings = () => {
                 />
               </div>
 
-              <div className="h-5 text-sm mt-2 text-red-500 block">
-                {error && error?.message}
-              </div>
+              <FormError error={error} />
             </div>
           </form>
         </form.Provider>

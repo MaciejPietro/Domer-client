@@ -1,4 +1,4 @@
-import Project from "../pages/Project";
+import Project from "@/pages/Project";
 import { withAuth } from "@/Common/lib/router/helpers";
 
 export const Route = withAuth({

@@ -1,5 +1,5 @@
-import NavigationMobile from "../nav/NavigationMobile";
-import SidebarDesktop from "../nav/SidebarDesktop";
+import NavigationMobile from "@/common/components/nav/NavigationMobile";
+import SidebarDesktop from "@/common/components/nav/SidebarDesktop";
 
 const Main = ({ children }: any) => {
   return (

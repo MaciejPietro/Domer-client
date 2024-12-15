@@ -1,5 +1,5 @@
-import type { DeleteAccountPayload, UpdateUserPayload } from "../types";
-import axiosClient from "./Client";
+import type { DeleteAccountPayload, UpdateUserPayload } from "@/User/types";
+import axiosClient from "@/User/api/Client";
 import { handleApiError } from "@/Common/api/utils";
 
 export default {

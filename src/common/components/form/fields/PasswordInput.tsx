@@ -1,7 +1,7 @@
 import { Input, PasswordInput as MantinePasswordInput } from "@mantine/core";
 
 import type { FormApi } from "@tanstack/react-form";
-import FieldError from "../FieldError";
+import FieldError from "@/common/components/form/FieldError";
 
 type ComponentProps = {
   form: FormApi<any, undefined>;

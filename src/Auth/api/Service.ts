@@ -3,6 +3,7 @@ import type {
   RegisterPayload,
   RemindPasswordPayload,
   ResetPasswordPayload,
+  ConfirmEmailPayload,
 } from "@/Auth/types";
 
 import axiosClient from "./Client";
@@ -19,8 +20,8 @@ export default {
       })
       .catch(handleApiError),
   logout: () => axiosClient.post(`/auth/logout`),
-  confirmEmail: (token: string, email: string) =>
-    axiosClient.get(`/auth/emailconfirmation?token=${token}&email=${email}`),
+  confirmEmail: (values: ConfirmEmailPayload) =>
+    axiosClient.post(`/auth/confirmemail`, values),
   remindPassword: (values: RemindPasswordPayload) =>
     axiosClient.post(`/auth/remindpassword`, {
       ...values,

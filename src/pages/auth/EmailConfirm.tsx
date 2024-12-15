@@ -12,9 +12,6 @@ export default function EmailConfirm() {
 
   const { mutateAsync } = useConfirmEmail();
 
-  //   const { token, email } = useSearch();
-  // cd
-
   useEffect(() => {
     void mutateAsync({ token: search.token, email: search.email });
   }, [search, mutateAsync]);

@@ -1,8 +1,9 @@
-import type { ApiResponse, ConfirmEmailPayload } from "@/Auth/types";
+import type { ConfirmEmailPayload } from "@/Auth/types";
 
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import AuthService from "@/Auth/api/Service";
+import type { ApiResponse } from "@/Common/api/types";
 
 type LoginResponse = ApiResponse & {
   status: number;
@@ -15,7 +16,7 @@ const useConfirmEmail = () => {
     ConfirmEmailPayload
   >({
     mutationKey: ["auth", "confirmEmail"],
-    mutationFn: ({ token, email }) => AuthService.confirmEmail(token, email),
+    mutationFn: AuthService.confirmEmail,
   });
 };
 

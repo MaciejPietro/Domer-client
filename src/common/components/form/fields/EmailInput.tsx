@@ -1,7 +1,7 @@
 import type { FormApi } from "@tanstack/react-form";
 import FieldError from "@/common/components/form/FieldError";
 
-import { isValidEmail } from "@/Common/utils/helpers";
+import { isValidEmail } from "@/common/utils/helpers";
 import { Input } from "@mantine/core";
 
 type ComponentProps = {

@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import { toastSuccess } from "@/Common/lib/toast";
+import { toastSuccess } from "@/common/lib/toast";
 import AuthService from "@/Auth/api/Service";
 import { useNavigate } from "@tanstack/react-router";
 import useAuthStore from "@/Auth/authStore";
-import type { ApiResponse } from "@/Common/api/types";
+import type { ApiResponse } from "@/common/api/types";
 
 const useLogout = () => {
   const { setAuth, setUser } = useAuthStore();

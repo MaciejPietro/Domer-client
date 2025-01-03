@@ -4,8 +4,8 @@ import { RouterProvider } from "@tanstack/react-router";
 import { Toaster } from "react-hot-toast";
 import { MantineProvider } from "@mantine/core";
 import useAuth from "@/Auth/hooks/useAuth";
-import { theme } from "@/Common/lib/mantine";
-import { router } from "@/Common/lib/router/index.ts";
+import { theme } from "@/common/lib/mantine";
+import { router } from "@/common/lib/router/index.ts";
 
 const queryClient = new QueryClient();
 

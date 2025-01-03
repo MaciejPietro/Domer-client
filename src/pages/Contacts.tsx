@@ -1,8 +1,8 @@
 import clsx from "clsx";
-import ContactsList from "@/Common/components/ContactsList";
-import Main from "@/Common/components/layout/Main";
+import ContactsList from "@/common/components/ContactsList";
+import Main from "@/common/components/layout/Main";
 import { useState } from "react";
-import ContactsListSelected from "@/Common/components/ContactsListSelected";
+import ContactsListSelected from "@/common/components/ContactsListSelected";
 
 type Tab = "Wszystkie" | "Wybrane";
 

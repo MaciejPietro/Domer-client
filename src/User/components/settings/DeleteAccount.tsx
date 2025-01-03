@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Modal from "@/Common/components/ui/Modal";
+import Modal from "@/common/components/ui/Modal";
 import { Button } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
-import PasswordInput from "@/Common/components/form/fields/PasswordInput";
+import PasswordInput from "@/common/components/form/fields/PasswordInput";
 import useDeleteAccount from "@/User/hooks/useDeleteAccount";
 import useUser from "@/User/hooks/useUser";
-import FormError from "@/Common/components/form/FormError";
+import FormError from "@/common/components/form/FormError";
 
 const DeleteAccount = () => {
   const user = useUser();

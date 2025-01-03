@@ -1,4 +1,4 @@
-import { API_PATH, API_URL } from "@/Common/settings";
+import { API_PATH, API_URL } from "@/common/settings";
 import axios from "axios";
 
 export default axios.create({

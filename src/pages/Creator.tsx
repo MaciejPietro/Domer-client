@@ -1,4 +1,4 @@
-import Main from "@/Common/components/layout/Main";
+import Main from "@/common/components/layout/Main";
 
 const Creator = () => {
   return (

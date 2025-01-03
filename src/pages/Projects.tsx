@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Table, Checkbox, Button } from "@mantine/core";
-import Main from "@/Common/components/layout/Main";
+import Main from "@/common/components/layout/Main";
 import clsx from "clsx";
 
 const elements = [

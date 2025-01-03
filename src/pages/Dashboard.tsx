@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import Main from "@/Common/components/layout/Main";
+import Main from "@/common/components/layout/Main";
 import {
   BanknotesIcon,
   ChartBarIcon,

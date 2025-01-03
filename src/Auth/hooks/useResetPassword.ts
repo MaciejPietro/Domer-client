@@ -3,8 +3,8 @@ import type { ResetPasswordPayload } from "@/Auth/types";
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import AuthService from "@/Auth/api/Service";
-import type { ApiResponse } from "@/Common/api/types";
-import { toastSuccess } from "@/Common/lib/toast";
+import type { ApiResponse } from "@/common/api/types";
+import { toastSuccess } from "@/common/lib/toast";
 import { useNavigate } from "@tanstack/react-router";
 
 const useResetPassword = () => {

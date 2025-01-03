@@ -1,5 +1,5 @@
 import RemindPassword from "@/pages/auth/RemindPassword";
-import { publicRoute } from "@/Common/lib/router/helpers";
+import { publicRoute } from "@/common/lib/router/helpers";
 
 export type ConfirmEmailSearchParams = {
   token?: string;

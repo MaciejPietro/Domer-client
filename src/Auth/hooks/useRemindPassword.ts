@@ -3,7 +3,7 @@ import type { RemindPasswordPayload } from "@/Auth/types";
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import AuthService from "@/Auth/api/Service";
-import type { ApiResponse } from "@/Common/api/types";
+import type { ApiResponse } from "@/common/api/types";
 import { useNavigate } from "@tanstack/react-router";
 
 const useRemindPassword = () => {

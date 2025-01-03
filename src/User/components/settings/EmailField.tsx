@@ -1,5 +1,5 @@
-import EditBtn from "@/Common/components/form/EditBtn";
-import EmailInput from "@/Common/components/form/fields/EmailInput";
+import EditBtn from "@/common/components/form/EditBtn";
+import EmailInput from "@/common/components/form/fields/EmailInput";
 import type { SettingsForm } from "@/pages/Settings";
 import useUser from "@/User/hooks/useUser";
 import type { FormApi } from "@tanstack/react-form";

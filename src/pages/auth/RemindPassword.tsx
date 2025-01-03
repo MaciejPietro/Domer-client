@@ -1,8 +1,8 @@
 import useRemindPassword from "@/Auth/hooks/useRemindPassword";
 import Layout from "@/Auth/Layout";
 import type { RemindPasswordPayload } from "@/Auth/types";
-import EmailInput from "@/Common/components/form/fields/EmailInput";
-import FormError from "@/Common/components/form/FormError";
+import EmailInput from "@/common/components/form/fields/EmailInput";
+import FormError from "@/common/components/form/FormError";
 import { Button } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
 import { Link } from "@tanstack/react-router";

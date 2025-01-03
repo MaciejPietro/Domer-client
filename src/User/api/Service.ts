@@ -1,6 +1,6 @@
 import type { DeleteAccountPayload, UpdateUserPayload } from "@/User/types";
 import axiosClient from "@/User/api/Client";
-import { handleApiError } from "@/Common/api/utils";
+import { handleApiError } from "@/common/api/utils";
 
 export default {
   resendEmailConfirmation: (email: string) =>

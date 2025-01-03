@@ -2,7 +2,7 @@ import { ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/outline";
 
 import { useState } from "react";
 import useLogout from "@/Auth/hooks/useLogout";
-import Modal from "@/Common/components/ui/Modal";
+import Modal from "@/common/components/ui/Modal";
 import { Button } from "@mantine/core";
 
 const Logout = () => {

@@ -1,4 +1,4 @@
-import PasswordInput from "@/Common/components/form/fields/PasswordInput";
+import PasswordInput from "@/common/components/form/fields/PasswordInput";
 import type { SettingsForm } from "@/pages/Settings";
 import { Checkbox } from "@mantine/core";
 import type { FormApi } from "@tanstack/react-form";

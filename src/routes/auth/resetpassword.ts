@@ -1,8 +1,8 @@
 import { redirect } from "@tanstack/react-router";
 
 import ResetPassword from "@/pages/auth/ResetPassword";
-import { isValidEmail } from "@/Common/utils/helpers";
-import { publicRoute } from "@/Common/lib/router/helpers";
+import { isValidEmail } from "@/common/utils/helpers";
+import { publicRoute } from "@/common/lib/router/helpers";
 
 export type ResetPasswordSearchParams = {
   token?: string;

@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import { toastSuccess } from "@/Common/lib/toast";
+import { toastSuccess } from "@/common/lib/toast";
 import useAuthStore, { type User } from "@/Auth/authStore";
-import type { ApiResponse } from "@/Common/api/types";
+import type { ApiResponse } from "@/common/api/types";
 import type { UpdateUserPayload } from "@/User/types";
 import Service from "@/User/api/Service";
 
@@ -12,7 +12,7 @@ type UpdateUserResponse = ApiResponse & {
 };
 
 const useUpdateUser = () => {
-  const { setUser } = useAuthStore();
+  const { checkAuth } = useAuthStore();
 
   return useMutation<
     UpdateUserResponse,
@@ -21,10 +21,9 @@ const useUpdateUser = () => {
   >({
     mutationKey: ["user", "update"],
     mutationFn: (values) => Service.update(values),
-    onSuccess: (response) => {
+    onSuccess: () => {
       toastSuccess("Dane zostały zaktualizowane");
-
-      setUser(response.data);
+      void checkAuth();
     },
   });
 };

@@ -6,8 +6,8 @@ import { Button } from "@mantine/core";
 
 import Layout from "@/Auth/Layout";
 
-import PasswordInput from "@/Common/components/form/fields/PasswordInput";
-import FormError from "@/Common/components/form/FormError";
+import PasswordInput from "@/common/components/form/fields/PasswordInput";
+import FormError from "@/common/components/form/FormError";
 import useResetPassword from "@/Auth/hooks/useResetPassword";
 import type { ResetPasswordSearchParams } from "@/routes/auth/resetpassword";
 

@@ -7,9 +7,9 @@ import useLogin from "@/Auth/hooks/useLogin";
 
 import Layout from "@/Auth/Layout";
 
-import PasswordInput from "@/Common/components/form/fields/PasswordInput";
-import EmailInput from "@/Common/components/form/fields/EmailInput";
-import FormError from "@/Common/components/form/FormError";
+import PasswordInput from "@/common/components/form/fields/PasswordInput";
+import EmailInput from "@/common/components/form/fields/EmailInput";
+import FormError from "@/common/components/form/FormError";
 
 export default function Login() {
   const { mutateAsync, isPending, error } = useLogin();

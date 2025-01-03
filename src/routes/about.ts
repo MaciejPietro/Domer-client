@@ -1,5 +1,5 @@
 import About from "@/pages/About";
-import { withAuth } from "@/Common/lib/router/helpers";
+import { withAuth } from "@/common/lib/router/helpers";
 
 export const Route = withAuth({
   path: "/about",

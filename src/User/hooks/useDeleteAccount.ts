@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import { toastSuccess } from "@/Common/lib/toast";
+import { toastSuccess } from "@/common/lib/toast";
 import useAuthStore from "@/Auth/authStore";
-import type { ApiResponse } from "@/Common/api/types";
+import type { ApiResponse } from "@/common/api/types";
 import type { DeleteAccountPayload } from "@/User/types";
 import Service from "@/User/api/Service";
 import { useNavigate } from "@tanstack/react-router";

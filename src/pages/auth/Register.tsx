@@ -1,16 +1,16 @@
 import { useForm } from "@tanstack/react-form";
 import { Button } from "@mantine/core";
 import useRegister from "@/Auth/hooks/useRegister";
-import { isValidEmail } from "@/Common/utils/helpers";
+import { isValidEmail } from "@/common/utils/helpers";
 import Layout from "@/Auth/Layout";
 
 import { Link } from "@tanstack/react-router";
 import type { RegisterPayload } from "@/Auth/types";
-import FieldError from "@/Common/components/form/FieldError";
-import Input from "@/Common/components/form/fields/Input";
-import PasswordInput from "@/Common/components/form/fields/PasswordInput";
-import EmailInput from "@/Common/components/form/fields/EmailInput";
-import FormError from "@/Common/components/form/FormError";
+import FieldError from "@/common/components/form/FieldError";
+import Input from "@/common/components/form/fields/Input";
+import PasswordInput from "@/common/components/form/fields/PasswordInput";
+import EmailInput from "@/common/components/form/fields/EmailInput";
+import FormError from "@/common/components/form/FormError";
 
 export default function Register() {
   const { mutateAsync, isPending, error } = useRegister();

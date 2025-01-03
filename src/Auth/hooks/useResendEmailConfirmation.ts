@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import UserService from "@/User/api/Service";
-import { toastSuccess } from "@/Common/lib/toast";
+import { toastSuccess } from "@/common/lib/toast";
 import useUser from "@/User/hooks/useUser";
-import type { ApiResponse } from "@/Common/api/types";
+import type { ApiResponse } from "@/common/api/types";
 
 const useResendEmailConfirmation = () => {
   const user = useUser();

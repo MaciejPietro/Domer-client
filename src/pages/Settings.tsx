@@ -1,5 +1,5 @@
-import FormError from "@/Common/components/form/FormError";
-import Main from "@/Common/components/layout/Main";
+import FormError from "@/common/components/form/FormError";
+import Main from "@/common/components/layout/Main";
 import ConfirmEmailField from "@/User/components/settings/ConfirmEmailField";
 import DeleteAccount from "@/User/components/settings/DeleteAccount";
 import EmailField from "@/User/components/settings/EmailField";

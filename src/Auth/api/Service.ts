@@ -7,7 +7,7 @@ import type {
 } from "@/Auth/types";
 
 import axiosClient from "./Client";
-import { handleApiError } from "@/Common/api/utils";
+import { handleApiError } from "@/common/api/utils";
 
 export default {
   login: async (values: LoginPayload) =>
@@ -19,7 +19,7 @@ export default {
         clientUri: `${window.location.origin}/auth/emailconfirm`,
       })
       .catch(handleApiError),
-  logout: () => axiosClient.post(`/auth/logout`),
+  logout: () => axiosClient.post(`/auth/logout`, {}),
   confirmEmail: (values: ConfirmEmailPayload) =>
     axiosClient.post(`/auth/confirmemail`, values),
   remindPassword: (values: RemindPasswordPayload) =>

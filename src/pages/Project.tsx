@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ProjectDetails from "@/Common/components/ProjectDetails";
-import Main from "@/Common/components/layout/Main";
+import ProjectDetails from "@/common/components/ProjectDetails";
+import Main from "@/common/components/layout/Main";
 import clsx from "clsx";
 
 type Tab = "Ogólne" | "Rzuty" | "Dane techniczne";

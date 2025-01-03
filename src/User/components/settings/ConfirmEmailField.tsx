@@ -1,5 +1,5 @@
 import useUser from "@/User/hooks/useUser";
-import Button from "@/Common/components/ui/Button";
+import Button from "@/common/components/ui/Button";
 import {
   ExclamationTriangleIcon,
   CheckCircleIcon,

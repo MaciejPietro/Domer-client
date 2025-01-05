@@ -1,5 +1,6 @@
 import axiosClient from "./Client";
 
 export default {
-  getAll: () => axiosClient.get(""),
+  getAll: (payload: URLSearchParams) =>
+    axiosClient.get("", { params: payload }),
 };

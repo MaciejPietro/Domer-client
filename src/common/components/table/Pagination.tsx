@@ -1,18 +1,26 @@
 import { Pagination as MantinePagination } from "@mantine/core";
 
-export default function Pagination({ table }: { table: any }) {
+export default function Pagination({
+  table,
+  pages,
+}: {
+  table: any;
+  pages: number;
+}) {
+  console.log("xdxd", pages);
+
   return (
     <MantinePagination
-      total={10}
+      total={pages}
       onChange={(page) => {
-        table.setPageIndex(page - 1);
+        table.setPageIndex(page);
       }}
-      onNextPage={() => {
-        table.nextPage();
-      }}
-      onPreviousPage={() => {
-        table.previousPage();
-      }}
+      // onNextPage={() => {
+      //   table.nextPage();
+      // }}
+      // onPreviousPage={() => {
+      //   table.previousPage();
+      // }}
     />
   );
 

@@ -3,7 +3,11 @@ import Main from "@/common/components/layout/Main";
 import clsx from "clsx";
 import ProjectsTable from "@/Projects/components/ProjectsTable";
 
-const tabs = [{ name: "Wszystkie", href: "#", count: "2" }];
+const tabs = [
+  { name: "Aktywne projekty", href: "#", count: "2" },
+  // { name: "Wszystkie", href: "#", count: "2" },
+  // { name: "Archiwum", href: "#", count: "2" },
+];
 
 const Tabs = ({ setTab, tab }: any) => {
   return (
@@ -15,7 +19,7 @@ const Tabs = ({ setTab, tab }: any) => {
               key={name}
               className={clsx(
                 name === tab
-                  ? "border-indigo-500 text-indigo-600"
+                  ? "border-blue-500 text-blue-600"
                   : "border-transparent text-gray-500 hover:border-gray-200 hover:text-gray-700",
                 "flex whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium"
               )}
@@ -24,7 +28,7 @@ const Tabs = ({ setTab, tab }: any) => {
               }}
             >
               {name}
-              {count ? (
+              {/* {count ? (
                 <span
                   className={clsx(
                     name === tab
@@ -35,7 +39,7 @@ const Tabs = ({ setTab, tab }: any) => {
                 >
                   {count}
                 </span>
-              ) : null}
+              ) : null} */}
             </button>
           ))}
         </nav>
@@ -45,12 +49,12 @@ const Tabs = ({ setTab, tab }: any) => {
 };
 
 export default function Projects() {
-  const [tab, setTab] = useState<any>("Wszystkie");
+  const [tab, setTab] = useState<any>("Aktywne projekty");
 
   return (
     <Main>
       <Tabs setTab={setTab} tab={tab} />
-      <div className="p-6">
+      <div className="py-6">
         <ProjectsTable />
       </div>
     </Main>

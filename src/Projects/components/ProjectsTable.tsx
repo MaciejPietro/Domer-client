@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useReducer, useState } from "react";
 
 import {
   type ColumnDef,
@@ -11,8 +11,11 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import Pagination from "@/common/components/table/Pagination";
-import { Table } from "@mantine/core";
+import { Button, Table } from "@mantine/core";
 import useProjects from "../hooks/useProjects";
+import { PROJECTS_PER_PAGE } from "../constants";
+import type { PageFilter } from "../types/api";
+import { Link } from "@tanstack/react-router";
 
 // declare module '@tanstack/react-table' {
 //   //allows us to define custom properties for our columns
@@ -23,103 +26,131 @@ import useProjects from "../hooks/useProjects";
 
 type Project = any;
 
+type PageState = {
+  page: PageFilter;
+};
+
+type PageAction = { type: "SET_PAGE"; payload: PageFilter };
+
+function stateReducer(state: PageState, action: PageAction): PageState {
+  switch (action.type) {
+    case "SET_PAGE":
+      return { ...state, page: action.payload };
+
+    default:
+      return state;
+  }
+}
+
 export default function ProjectsTable() {
-  const { data } = useProjects();
+  const [state, dispatch] = useReducer(stateReducer, {
+    page: { pageIndex: 1, pageSize: PROJECTS_PER_PAGE },
+  });
 
-  const rerender = React.useReducer(() => ({}), {})[1];
+  const { data } = useProjects(state);
 
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
+  console.log("xdxd", data);
+
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const columns = useMemo<Array<ColumnDef<Project, any>>>(
     () => [
       {
         header: () => <span>Nazwa</span>,
         accessorKey: "name",
-        cell: (cell: any) => cell.getValue() as string,
+        cell: (cell: any) => (
+          <span className="font-semibold">{cell.getValue()}</span>
+        ),
       },
       {
         header: () => <span>Powierzchnia zabudowy</span>,
         accessorKey: "buildingArea",
-        cell: (cell: any) => `${cell.getValue()} m2`,
+        cell: (cell: any) => (
+          <span>
+            {cell.getValue()} m<sup>2</sup>
+          </span>
+        ),
       },
       {
         header: () => <span>Powierzchnia użytkowa</span>,
         accessorKey: "usableArea",
-        cell: (cell: any) => `${cell.getValue()} m2`,
+        cell: (cell: any) => (
+          <span>
+            {cell.getValue()} m<sup>2</sup>
+          </span>
+        ),
+      },
+      {
+        header: () => <span>Utworzono</span>,
+        accessorKey: "createdAt",
+        cell: (cell: any) =>
+          new Date(cell.getValue() as string).toLocaleDateString("pl-PL", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }),
       },
       {
         header: () => <span>Zmodyfikowano</span>,
         accessorKey: "updatedAt",
-        cell: (cell: any) => cell.getValue() as string,
+        cell: (cell: any) =>
+          new Date(cell.getValue() as string).toLocaleDateString("pl-PL", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }),
       },
       //   {
-      //     accessorFn: (row) => row.lastName,
-      //     id: "lastName",
-      //     cell: (info) => info.getValue(),
-      //     header: () => <span>Last Name</span>,
-      //   },
-      //   {
       //     accessorFn: (row) => `${row.firstName} ${row.lastName}`,
-      //     id: "fullName",
-      //     header: "Full Name",
-      //     cell: (info) => info.getValue(),
-      //   },
-      //   {
-      //     accessorKey: "age",
-      //     header: () => "Age",
-      //     meta: {
-      //       filterVariant: "range",
-      //     },
-      //   },
-      //   {
-      //     accessorKey: "visits",
-      //     header: () => <span>Visits</span>,
-      //     meta: {
-      //       filterVariant: "range",
-      //     },
-      //   },
-      //   {
-      //     accessorKey: "status",
       //     header: "Status",
       //     meta: {
       //       filterVariant: "select",
       //     },
-      //   },
-      //   {
-      //     accessorKey: "progress",
-      //     header: "Profile Progress",
-      //     meta: {
-      //       filterVariant: "range",
-      //     },
-      //   },
     ],
     []
   );
 
-  console.log("xdxd", data);
-
   const table = useReactTable({
-    data: data ? data.data : [],
+    data: data ? data.data.results : [],
     columns,
     filterFns: {},
     state: {
       columnFilters,
+      pagination: {
+        pageIndex: state.page.pageIndex,
+        pageSize: PROJECTS_PER_PAGE,
+      },
     },
+    manualPagination: true,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(), //client side filtering
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onPaginationChange: (updater) => {
+      if (typeof updater === "function") {
+        const newPagination = updater({
+          pageIndex: state.page.pageIndex,
+          pageSize: PROJECTS_PER_PAGE,
+        });
+        dispatch({ type: "SET_PAGE", payload: newPagination });
+      }
+    },
     debugTable: true,
     debugHeaders: true,
     debugColumns: false,
   });
 
+  const pages = data?.data.totalPages;
+
   return (
     <>
-      <Table stickyHeader stickyHeaderOffset={60}>
+      <Table
+        verticalSpacing="sm"
+        striped
+        highlightOnHover
+        horizontalSpacing="xl"
+      >
         <Table.Thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <Table.Tr key={headerGroup.id}>
@@ -129,21 +160,22 @@ export default function ProjectsTable() {
                     {header.isPlaceholder ? null : (
                       <>
                         <div
-                          {...{
-                            className: header.column.getCanSort()
-                              ? "cursor-pointer select-none"
-                              : "",
-                            onClick: header.column.getToggleSortingHandler(),
-                          }}
+                          className="text-gray-600 font-medium"
+                          // {...{
+                          //   className: header.column.getCanSort()
+                          //     ? "cursor-pointer select-none"
+                          //     : "",
+                          //   onClick: header.column.getToggleSortingHandler(),
+                          // }}
                         >
                           {flexRender(
                             header.column.columnDef.header,
                             header.getContext()
                           )}
-                          {{
+                          {/* {{
                             asc: " 🔼",
                             desc: " 🔽",
-                          }[header.column.getIsSorted() as string] ?? null}
+                          }[header.column.getIsSorted() as string] ?? null} */}
                         </div>
                         {/* {header.column.getCanFilter() ? (
                           <Filter column={header.column} />
@@ -162,7 +194,7 @@ export default function ProjectsTable() {
               <Table.Tr key={row.id}>
                 {row.getVisibleCells().map((cell) => {
                   return (
-                    <Table.Td key={cell.id}>
+                    <Table.Td key={cell.id} className="py-2 font-normal">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -170,12 +202,17 @@ export default function ProjectsTable() {
                     </Table.Td>
                   );
                 })}
+                <Table.Td key="actions">
+                  <Link to={`/projects/${row.original.id}`}>
+                    <Button variant="subtle">Zobacz</Button>
+                  </Link>
+                </Table.Td>
               </Table.Tr>
             );
           })}
         </Table.Tbody>
-        <div className="mt-10">
-          <Pagination table={table} />
+        <div className="mt-10 px-6">
+          <Pagination table={table} pages={pages} />
         </div>
       </Table>
       {/* <div className="text-xs mt-10 space-y-5">

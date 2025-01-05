@@ -12,11 +12,11 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as SettingsImport } from './routes/settings'
-import { Route as ProjectsImport } from './routes/projects'
 import { Route as ProjectImport } from './routes/project'
 import { Route as CreatorImport } from './routes/creator'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as ProjectsIndexImport } from './routes/projects/index'
 import { Route as AuthThankyouImport } from './routes/auth/thankyou'
 import { Route as AuthResetpasswordsentImport } from './routes/auth/resetpasswordsent'
 import { Route as AuthResetpasswordImport } from './routes/auth/resetpassword'
@@ -29,11 +29,6 @@ import { Route as AuthEmailconfirmImport } from './routes/auth/emailconfirm'
 
 const SettingsRoute = SettingsImport.update({
   path: '/settings',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const ProjectsRoute = ProjectsImport.update({
-  path: '/projects',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -54,6 +49,11 @@ const AboutRoute = AboutImport.update({
 
 const IndexRoute = IndexImport.update({
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProjectsIndexRoute = ProjectsIndexImport.update({
+  path: '/projects/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -112,10 +112,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectImport
       parentRoute: typeof rootRoute
     }
-    '/projects': {
-      preLoaderRoute: typeof ProjectsImport
-      parentRoute: typeof rootRoute
-    }
     '/settings': {
       preLoaderRoute: typeof SettingsImport
       parentRoute: typeof rootRoute
@@ -148,6 +144,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthThankyouImport
       parentRoute: typeof rootRoute
     }
+    '/projects/': {
+      preLoaderRoute: typeof ProjectsIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -158,7 +158,6 @@ export const routeTree = rootRoute.addChildren([
   AboutRoute,
   CreatorRoute,
   ProjectRoute,
-  ProjectsRoute,
   SettingsRoute,
   AuthEmailconfirmRoute,
   AuthLoginRoute,
@@ -167,6 +166,7 @@ export const routeTree = rootRoute.addChildren([
   AuthResetpasswordRoute,
   AuthResetpasswordsentRoute,
   AuthThankyouRoute,
+  ProjectsIndexRoute,
 ])
 
 /* prettier-ignore-end */

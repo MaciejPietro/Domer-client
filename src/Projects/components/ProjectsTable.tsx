@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import {
-  type Column,
   type ColumnDef,
   type ColumnFiltersState,
   flexRender,
@@ -11,9 +10,9 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import Filter from "@/common/components/table/Filter";
 import Pagination from "@/common/components/table/Pagination";
 import { Table } from "@mantine/core";
+import useProjects from "../hooks/useProjects";
 
 // declare module '@tanstack/react-table' {
 //   //allows us to define custom properties for our columns
@@ -22,28 +21,37 @@ import { Table } from "@mantine/core";
 //   }
 // }
 
-const elements = [
-  { position: 6, mass: 12.011, symbol: "C", name: "Carbon" },
-  { position: 7, mass: 14.007, symbol: "N", name: "Nitrogen" },
-  { position: 39, mass: 88.906, symbol: "Y", name: "Yttrium" },
-  { position: 56, mass: 137.33, symbol: "Ba", name: "Barium" },
-  { position: 58, mass: 140.12, symbol: "Ce", name: "Cerium" },
-];
-
 type Project = any;
 
 export default function ProjectsTable() {
+  const { data } = useProjects();
+
   const rerender = React.useReducer(() => ({}), {})[1];
 
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
 
-  const columns = React.useMemo<Array<ColumnDef<Project, any>>>(
+  const columns = useMemo<Array<ColumnDef<Project, any>>>(
     () => [
       {
         header: () => <span>Nazwa</span>,
         accessorKey: "name",
+        cell: (cell: any) => cell.getValue() as string,
+      },
+      {
+        header: () => <span>Powierzchnia zabudowy</span>,
+        accessorKey: "buildingArea",
+        cell: (cell: any) => `${cell.getValue()} m2`,
+      },
+      {
+        header: () => <span>Powierzchnia użytkowa</span>,
+        accessorKey: "usableArea",
+        cell: (cell: any) => `${cell.getValue()} m2`,
+      },
+      {
+        header: () => <span>Zmodyfikowano</span>,
+        accessorKey: "updatedAt",
         cell: (cell: any) => cell.getValue() as string,
       },
       //   {
@@ -90,18 +98,10 @@ export default function ProjectsTable() {
     []
   );
 
-  const [data, setData] = React.useState<Array<Project>>(() => []);
-
-  const refreshData = () => {
-    setData(() => [
-      {
-        name: "elo",
-      },
-    ]);
-  }; //stress test
+  console.log("xdxd", data);
 
   const table = useReactTable({
-    data,
+    data: data ? data.data : [],
     columns,
     filterFns: {},
     state: {
@@ -174,29 +174,11 @@ export default function ProjectsTable() {
             );
           })}
         </Table.Tbody>
-        <div>
+        <div className="mt-10">
           <Pagination table={table} />
         </div>
       </Table>
-      <div className="text-xs mt-10 space-y-5">
-        <div>
-          <button
-            onClick={() => {
-              rerender();
-            }}
-          >
-            Force Rerender
-          </button>
-        </div>
-        <div>
-          <button
-            onClick={() => {
-              refreshData();
-            }}
-          >
-            Refresh Data
-          </button>
-        </div>
+      {/* <div className="text-xs mt-10 space-y-5">
         <pre>
           {JSON.stringify(
             { columnFilters: table.getState().columnFilters },
@@ -204,7 +186,7 @@ export default function ProjectsTable() {
             2
           )}
         </pre>
-      </div>
+      </div> */}
     </>
   );
 }

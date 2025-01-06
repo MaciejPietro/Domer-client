@@ -17,6 +17,7 @@ import { Route as CreatorImport } from './routes/creator'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as ProjectsIndexImport } from './routes/projects/index'
+import { Route as ProjectsProjectIdImport } from './routes/projects/$projectId'
 import { Route as AuthThankyouImport } from './routes/auth/thankyou'
 import { Route as AuthResetpasswordsentImport } from './routes/auth/resetpasswordsent'
 import { Route as AuthResetpasswordImport } from './routes/auth/resetpassword'
@@ -54,6 +55,11 @@ const IndexRoute = IndexImport.update({
 
 const ProjectsIndexRoute = ProjectsIndexImport.update({
   path: '/projects/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProjectsProjectIdRoute = ProjectsProjectIdImport.update({
+  path: '/projects/$projectId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -144,6 +150,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthThankyouImport
       parentRoute: typeof rootRoute
     }
+    '/projects/$projectId': {
+      preLoaderRoute: typeof ProjectsProjectIdImport
+      parentRoute: typeof rootRoute
+    }
     '/projects/': {
       preLoaderRoute: typeof ProjectsIndexImport
       parentRoute: typeof rootRoute
@@ -166,6 +176,7 @@ export const routeTree = rootRoute.addChildren([
   AuthResetpasswordRoute,
   AuthResetpasswordsentRoute,
   AuthThankyouRoute,
+  ProjectsProjectIdRoute,
   ProjectsIndexRoute,
 ])
 

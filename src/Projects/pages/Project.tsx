@@ -2,13 +2,15 @@ import { useState } from "react";
 import ProjectDetails from "@/common/components/ProjectDetails";
 import Main from "@/common/components/layout/Main";
 import clsx from "clsx";
+import { useParams } from "@tanstack/react-router";
+import useProject from "../hooks/useProject";
 
 type Tab = "Ogólne" | "Rzuty" | "Dane techniczne";
 
 const tabs = [
   { name: "Ogólne" },
-  { name: "Rzuty" },
   { name: "Dane techniczne" },
+  { name: "Kreator" },
 ];
 
 const stats = [
@@ -30,7 +32,7 @@ const Tabs = ({ setTab, tab }: any) => {
         <select
           id="tabs"
           name="tabs"
-          className="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+          className="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
           defaultValue={tab}
           onChange={(e) => {
             setTab(e.target.value);
@@ -51,7 +53,7 @@ const Tabs = ({ setTab, tab }: any) => {
                 key={name}
                 className={clsx(
                   name === tab
-                    ? "border-indigo-500 text-indigo-600"
+                    ? "border-blue-500 text-blue-600"
                     : "border-transparent text-gray-500 hover:border-gray-200 hover:text-gray-700",
                   "flex whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium"
                 )}
@@ -100,31 +102,38 @@ const Stats = () => {
 };
 
 const Projects = () => {
+  // @ts-expect-error find why
+  const { projectId } = useParams({ from: "/projects/$projectId" });
+
+  const { data } = useProject({ projectId });
+
+  console.log("xdxd data", data?.data.result);
+
+  const result = data?.data.result;
+
   const [tab, setTab] = useState<Tab>("Ogólne");
 
   return (
     <Main>
       <Tabs setTab={setTab} tab={tab} />
 
-      <div className="mt-10 lg:px-8">
-        {tab === "Ogólne" ? <ProjectDetails /> : null}
-        {tab === "Rzuty" ? (
-          <div>
-            Rzuty
-            <img
-              src=" https://i.wpimg.pl/c/4000x/wpcdn.pl/extradom/designs/72062/586771/cd35fc79ce81fbeea3988df6cee4d4e871797fc73c35235ae0aafba3d9af9fc6.png"
-              alt=""
-            />
-          </div>
-        ) : null}
+      {tab === "Ogólne" && result ? <ProjectDetails data={result} /> : null}
+      {tab === "Rzuty" ? (
+        <div>
+          Rzuty
+          <img
+            src=" https://i.wpimg.pl/c/4000x/wpcdn.pl/extradom/designs/72062/586771/cd35fc79ce81fbeea3988df6cee4d4e871797fc73c35235ae0aafba3d9af9fc6.png"
+            alt=""
+          />
+        </div>
+      ) : null}
 
-        {tab === "Dane techniczne" ? (
-          <div>
-            Dane techniczne
-            <Stats />
-          </div>
-        ) : null}
-      </div>
+      {tab === "Dane techniczne" ? (
+        <div>
+          Dane techniczne
+          <Stats />
+        </div>
+      ) : null}
     </Main>
   );
 };

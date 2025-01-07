@@ -8,12 +8,7 @@ const ProjectDetails = ({ data }: ComponentProps) => {
   console.log("xdxd", data);
 
   return (
-    <div className="px-6 pt-12 max-w-2xl">
-      {/* <img
-        className="rounded-lg"
-        src="https://i.wpimg.pl/c/1920x720/wpcdn.pl/extradom/designs/72062/586778/4e3ec8bd096f7e7f4c398bf14cbe2f183e4852267faf20145bb5ab4a61f976ea.jpg"
-        alt=""
-      /> */}
+    <div className="px-6 pt-12  grid grid-cols-2 gap-4">
       <div className="flex flex-col gap-2">
         <div>
           <div className="flex items-center gap-x-3">
@@ -66,6 +61,12 @@ const ProjectDetails = ({ data }: ComponentProps) => {
           </div> */}
         </div>
       </div>
+
+      <img
+        className="rounded-lg"
+        src="https://i.wpimg.pl/c/1920x720/wpcdn.pl/extradom/designs/72062/586778/4e3ec8bd096f7e7f4c398bf14cbe2f183e4852267faf20145bb5ab4a61f976ea.jpg"
+        alt=""
+      />
     </div>
   );
 };

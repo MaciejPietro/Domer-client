@@ -1,4 +1,4 @@
-import type { Project, ProjectId } from "./mixed";
+import type { ProjectId } from "./mixed";
 
 export type PageFilter = {
   pageIndex: number;
@@ -10,5 +10,9 @@ export type GetAllProjectsPayload = {
 };
 
 export type GetProjectPayload = {
+  projectId: ProjectId;
+};
+
+export type DeleteProjectPayload = {
   projectId: ProjectId;
 };

@@ -44,7 +44,13 @@ const DeleteAccount = () => {
         </div>
 
         <div className="flex items-start md:col-span-2 mt-4">
-          <Button color="red" loading={isPending} onClick={handleDelete}>
+          <Button
+            color="red"
+            variant="light"
+            size="xs"
+            loading={isPending}
+            onClick={handleDelete}
+          >
             Tak, usuń moje konto
           </Button>
         </div>
@@ -55,6 +61,8 @@ const DeleteAccount = () => {
           setActive(false);
         }}
         title="Usuń konto"
+        radius="none"
+        padding="xl"
       >
         <p className="text-sm text-gray-500">
           Aby usunąć swoje konto, musisz podać swoje hasło.

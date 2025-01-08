@@ -1,13 +1,20 @@
 import Main from "@/common/components/layout/Main";
+import ProjectName from "@/Projects/components/Creator/ProjectName";
+import SaveProjectFromCreatorModal from "@/Projects/components/Creator/SaveProjectFromCreatorModal";
 
 const Creator = () => {
   return (
-    <Main>
-      <img
-        src="/create-3d.webp"
-        alt=""
-        className="-mt-7 max-h-[90vh] max-w-screen w-full object-contain object-left"
-      />
+    <Main withoutPadding>
+      <div className="h-16 border-b border-gray-200  px-4 flex items-center justify-between">
+        <ProjectName />
+        <SaveProjectFromCreatorModal />
+      </div>
+      <div>
+        <iframe
+          src="https://domer.netlify.app/"
+          className="w-full h-[calc(100vh-4rem)] object-contain"
+        ></iframe>
+      </div>
     </Main>
   );
 };

@@ -79,7 +79,7 @@ export default function ResetPassword() {
             Chcesz przetestować aplikację?{" "}
             <a
               href="#"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              className="font-semibold leading-6 text-blue-600 hover:text-blue-500"
             >
               Rozpocznij w trybie demo
             </a>

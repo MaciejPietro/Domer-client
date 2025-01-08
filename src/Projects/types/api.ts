@@ -16,3 +16,8 @@ export type GetProjectPayload = {
 export type DeleteProjectPayload = {
   projectId: ProjectId;
 };
+
+export type CreateProjectPayload = {
+  name: string;
+  description: string;
+};

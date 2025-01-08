@@ -42,14 +42,12 @@ function stateReducer(state: PageState, action: PageAction): PageState {
   }
 }
 
-export default function ProjectsTable() {
+export default function ProjectsList() {
   const [state, dispatch] = useReducer(stateReducer, {
     page: { pageIndex: 1, pageSize: PROJECTS_PER_PAGE },
   });
 
   const { data } = useProjects(state);
-
-  console.log("xdxd", data);
 
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
@@ -65,20 +63,26 @@ export default function ProjectsTable() {
       {
         header: () => <span>Powierzchnia zabudowy</span>,
         accessorKey: "buildingArea",
-        cell: (cell: any) => (
-          <span>
-            {cell.getValue()} m<sup>2</sup>
-          </span>
-        ),
+        cell: (cell: any) =>
+          cell.getValue() ? (
+            <span>
+              {cell.getValue()} m<sup>2</sup>
+            </span>
+          ) : (
+            <span></span>
+          ),
       },
       {
         header: () => <span>Powierzchnia użytkowa</span>,
         accessorKey: "usableArea",
-        cell: (cell: any) => (
-          <span>
-            {cell.getValue()} m<sup>2</sup>
-          </span>
-        ),
+        cell: (cell: any) =>
+          cell.getValue() ? (
+            <span>
+              {cell.getValue()} m<sup>2</sup>
+            </span>
+          ) : (
+            <span></span>
+          ),
       },
       {
         header: () => <span>Utworzono</span>,

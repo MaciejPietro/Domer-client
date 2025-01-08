@@ -4,7 +4,7 @@ const About = () => {
   return (
     <Main>
       <div className="px-6 max-w-2xl ">
-        <h2 className="text-xs font-semibold leading-7 text-indigo-600">
+        <h2 className="text-xs font-semibold leading-7 text-blue-600">
           Wszystko co potrzebujesz do zarządzania budową.
         </h2>
         <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">

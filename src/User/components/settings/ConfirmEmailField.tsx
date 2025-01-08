@@ -33,13 +33,15 @@ const ConfirmEmailField = () => {
               Nie otrzymałeś wiadomość z linkiem aktywacyjnym?
             </p>
             <Button
-              variant="light"
+              variant="transparent"
               color="black"
               size="xs"
               onClick={handleResendEmailConfirmation}
               loading={isPending}
             >
-              Wyślij ponownie
+              <span className="font-medium text-gray-400 hover:text-gray-600">
+                Wyślij ponownie
+              </span>
             </Button>
           </div>
         </>

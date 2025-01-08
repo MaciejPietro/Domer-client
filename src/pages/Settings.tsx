@@ -56,9 +56,6 @@ const Settings = () => {
         <h2 className="text-base font-semibold leading-7 text-gray-900">
           Ustawienia konta
         </h2>
-        <p className="mt-1 text-sm leading-6 text-gray-400">
-          Edytuj swoje ustawienia konta.
-        </p>
       </div>
 
       <div className="md:col-span-2 px-8 my-8">

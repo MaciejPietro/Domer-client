@@ -59,7 +59,7 @@ export default function Login() {
         Nie masz konta?
         <Link
           to="/auth/register"
-          className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+          className="font-semibold leading-6 text-blue-600 hover:text-blue-500"
         >
           Zarejestruj się
         </Link>
@@ -69,7 +69,7 @@ export default function Login() {
             Chcesz przetestować aplikację?{" "}
             <a
               href="#"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              className="font-semibold leading-6 text-blue-600 hover:text-blue-500"
             >
               Rozpocznij w trybie demo
             </a>

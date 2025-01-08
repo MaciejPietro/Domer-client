@@ -52,7 +52,7 @@ const ContactsList = () => {
         <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
           <button
             type="button"
-            className="block rounded-md bg-indigo-600 px-3 py-1.5 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="block rounded-md bg-blue-600 px-3 py-1.5 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
           >
             Dodaj kontakt
           </button>
@@ -84,7 +84,7 @@ const ContactsList = () => {
                     <th scope="col" className="relative px-7 sm:w-12 sm:px-6">
                       <input
                         type="checkbox"
-                        className="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                        className="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
                         ref={checkbox}
                         checked={checked}
                         onChange={toggleAll}
@@ -138,11 +138,11 @@ const ContactsList = () => {
                     >
                       <td className="relative px-7 sm:w-12 sm:px-6">
                         {selectedProjects.includes(project) && (
-                          <div className="absolute inset-y-0 left-0 w-0.5 bg-indigo-600" />
+                          <div className="absolute inset-y-0 left-0 w-0.5 bg-blue-600" />
                         )}
                         <input
                           type="checkbox"
-                          className="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                          className="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
                           value={project.name}
                           checked={selectedProjects.includes(project)}
                           onChange={(e) => {
@@ -158,7 +158,7 @@ const ContactsList = () => {
                         className={clsx(
                           "whitespace-nowrap py-4 pr-3 text-sm font-medium",
                           selectedProjects.includes(project)
-                            ? "text-indigo-600"
+                            ? "text-blue-600"
                             : "text-gray-900"
                         )}
                       >
@@ -182,7 +182,7 @@ const ContactsList = () => {
                         </button>
                         <a
                           href="#"
-                          className="text-indigo-600 hover:text-indigo-900"
+                          className="text-blue-600 hover:text-indigo-900"
                         >
                           Link do strony
                           <span className="sr-only">, {project.name}</span>

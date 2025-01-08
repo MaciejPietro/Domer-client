@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Main from "@/common/components/layout/Main";
 import clsx from "clsx";
-import ProjectsTable from "@/Projects/components/ProjectsTable";
+import ProjectsList from "@/Projects/components/ProjectsList";
+import NewProject from "../components/NewProject";
 
 const tabs = [
   { name: "Aktywne projekty", href: "#", count: "2" },
@@ -12,7 +13,7 @@ const tabs = [
 const Tabs = ({ setTab, tab }: any) => {
   return (
     <div className="hidden sm:block">
-      <div className="lg:px-8  border-b border-gray-200">
+      <div className="lg:px-8 flex justify-between border-b border-gray-200">
         <nav className="-mb-px flex space-x-8" aria-label="Tabs">
           {tabs.map(({ name, count }) => (
             <button
@@ -32,7 +33,7 @@ const Tabs = ({ setTab, tab }: any) => {
                 <span
                   className={clsx(
                     name === tab
-                      ? "bg-indigo-100 text-indigo-600"
+                      ? "bg-indigo-100 text-blue-600"
                       : "bg-gray-100 text-gray-900",
                     "ml-3 hidden rounded-full py-0.5 px-2.5 text-xs font-medium md:inline-block"
                   )}
@@ -43,6 +44,8 @@ const Tabs = ({ setTab, tab }: any) => {
             </button>
           ))}
         </nav>
+
+        <NewProject />
       </div>
     </div>
   );
@@ -55,7 +58,7 @@ export default function Projects() {
     <Main>
       <Tabs setTab={setTab} tab={tab} />
       <div className="py-6">
-        <ProjectsTable />
+        <ProjectsList />
       </div>
     </Main>
   );

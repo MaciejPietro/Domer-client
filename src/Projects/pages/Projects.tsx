@@ -13,14 +13,14 @@ const tabs = [
 const Tabs = ({ setTab, tab }: any) => {
   return (
     <div className="hidden sm:block">
-      <div className="lg:px-8 flex justify-between border-b border-gray-200">
+      <div className="lg:px-8 flex items-end justify-between border-b border-gray-200 h-16">
         <nav className="-mb-px flex space-x-8" aria-label="Tabs">
           {tabs.map(({ name, count }) => (
             <button
               key={name}
               className={clsx(
                 name === tab
-                  ? "border-blue-500 text-blue-600"
+                  ? "border-blue-500 text-blue-500"
                   : "border-transparent text-gray-500 hover:border-gray-200 hover:text-gray-700",
                 "flex whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium"
               )}
@@ -45,7 +45,9 @@ const Tabs = ({ setTab, tab }: any) => {
           ))}
         </nav>
 
-        <NewProject />
+        <div className="pb-3">
+          <NewProject />
+        </div>
       </div>
     </div>
   );
@@ -55,7 +57,7 @@ export default function Projects() {
   const [tab, setTab] = useState<any>("Aktywne projekty");
 
   return (
-    <Main>
+    <Main withoutPadding>
       <Tabs setTab={setTab} tab={tab} />
       <div className="py-6">
         <ProjectsList />

@@ -55,8 +55,6 @@ const Projects = () => {
 
   const { data, error, status } = useProject({ projectId });
 
-  console.log("xdxd data", status);
-
   const result = data?.data.result;
 
   const [tab, setTab] = useState<Tab>("Ogólne");
@@ -65,7 +63,7 @@ const Projects = () => {
   const isError = error?.response?.data?.status === 400;
 
   return (
-    <Main>
+    <Main withoutPadding>
       <ProjectTabs
         setTab={setTab}
         tab={tab}
@@ -78,20 +76,20 @@ const Projects = () => {
       {data && (
         <>
           {tab === "Ogólne" && result ? <ProjectDetails data={result} /> : null}
-          {tab === "Rzuty" ? (
-            <div>
-              Rzuty
-              <img
-                src=" https://i.wpimg.pl/c/4000x/wpcdn.pl/extradom/designs/72062/586771/cd35fc79ce81fbeea3988df6cee4d4e871797fc73c35235ae0aafba3d9af9fc6.png"
-                alt=""
-              />
-            </div>
-          ) : null}
 
           {tab === "Dane techniczne" ? (
             <div className="p-6">
               Dane techniczne
               <Stats />
+            </div>
+          ) : null}
+
+          {tab === "Kreator" ? (
+            <div>
+              <iframe
+                src="https://domer.netlify.app/"
+                className="w-full h-[calc(100vh-4rem)] object-contain"
+              ></iframe>
             </div>
           ) : null}
         </>

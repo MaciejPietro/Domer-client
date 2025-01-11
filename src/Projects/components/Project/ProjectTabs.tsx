@@ -30,12 +30,12 @@ const ProjectTabs = ({
   isLoading,
   isError,
 }: ComponentProps) => {
-  if (isError) return <div className="h-11"></div>;
+  if (isError) return <div className="h-16"></div>;
 
   return (
     <>
       {isLoading ? (
-        <div className="flex gap-2 items-center justify-between px-6 mb-1 h-10">
+        <div className="flex gap-2 items-center justify-between px-6 mb-1 h-16">
           <div className="flex gap-2">
             <Skeleton height={24} mt={6} width="80px" radius="sm" />
             <Skeleton height={24} mt={6} width="160px" radius="sm" />
@@ -45,7 +45,7 @@ const ProjectTabs = ({
           <Skeleton height={24} mt={6} width="24" radius="sm" />
         </div>
       ) : (
-        <div className="border-b border-gray-200 flex justify-between items-end h-10">
+        <div className="border-b border-gray-200 flex justify-between items-end h-16">
           <Tabs
             defaultValue={tab}
             radius={1}

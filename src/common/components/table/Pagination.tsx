@@ -7,8 +7,6 @@ export default function Pagination({
   table: any;
   pages: number;
 }) {
-  console.log("xdxd", pages);
-
   return (
     <MantinePagination
       total={pages}

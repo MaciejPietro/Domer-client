@@ -1,3 +1,10 @@
-import { atom } from "jotai";
+import { atomWithStorage, createJSONStorage } from "jotai/utils";
 
-export const isCollapsedSidebarAtom = atom(false);
+const storage = createJSONStorage(() => localStorage);
+
+export const isCollapsedSidebarAtom = atomWithStorage(
+  "isCollapsedSidebar",
+  false,
+  storage,
+  { getOnInit: true }
+);

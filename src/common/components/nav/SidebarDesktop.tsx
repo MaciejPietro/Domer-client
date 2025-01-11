@@ -4,12 +4,10 @@ import {
   FolderIcon,
   HomeIcon,
 } from "@heroicons/react/24/outline";
-import { Link, useRouterState } from "@tanstack/react-router";
-import useUser from "@/User/hooks/useUser";
-import Logout from "@/Auth/components/Logout";
+import { useRouterState } from "@tanstack/react-router";
 
 import CollapseBtn from "./Sidebar/CollapseBtn";
-import { useAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import { isCollapsedSidebarAtom } from "@/common/lib/store";
 import Logo from "./Sidebar/Logo";
 import AccountItem from "./Sidebar/AccountItem";
@@ -22,7 +20,7 @@ const navigation = [
 ];
 
 const SidebarDesktop = () => {
-  const [isCollapsedSidebar] = useAtom(isCollapsedSidebarAtom);
+  const isCollapsedSidebar = useAtomValue(isCollapsedSidebarAtom);
   const router = useRouterState();
 
   const path = router.location.pathname;

@@ -5,8 +5,6 @@ type ComponentProps = {
 };
 
 const ProjectDetails = ({ data }: ComponentProps) => {
-  console.log("xdxd", data);
-
   return (
     <div className="px-6 pt-12  grid grid-cols-2 gap-4">
       <div className="flex flex-col gap-2">

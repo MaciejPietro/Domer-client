@@ -26,7 +26,7 @@ const SaveProjectFromCreatorModal = () => {
         leftSection={<PlusIcon className="size-4" />}
         variant="light"
       >
-        Dodaj projekt
+        Dodaj jako projekt
       </Button>
       <Modal
         opened={active}

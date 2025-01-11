@@ -1,12 +1,10 @@
 import Main from "@/common/components/layout/Main";
-import ProjectName from "@/Projects/components/Creator/ProjectName";
 import SaveProjectFromCreatorModal from "@/Projects/components/Creator/SaveProjectFromCreatorModal";
 
 const Creator = () => {
   return (
     <Main withoutPadding>
       <div className="h-16 border-b border-gray-200  px-4 flex items-center justify-between">
-        <ProjectName />
         <SaveProjectFromCreatorModal />
       </div>
       <div>

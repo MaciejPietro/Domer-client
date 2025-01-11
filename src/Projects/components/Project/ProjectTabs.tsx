@@ -1,17 +1,15 @@
 import {
+  BanknotesIcon,
   HomeIcon,
   SquaresPlusIcon,
-  WrenchIcon,
 } from "@heroicons/react/24/outline";
 import { Skeleton, Tabs } from "@mantine/core";
-import DeleteProject from "./DeleteProject";
 import type { ProjectId } from "@/Projects/types/mixed";
 import type { Tab } from "@/Projects/pages/Project";
-import ProjectMenu from "./ProjectMenu";
 
 const tabs = [
-  { name: "Ogólne", icon: <HomeIcon className="size-4" /> },
-  { name: "Dane techniczne", icon: <WrenchIcon className="size-4" /> },
+  { name: "Dane projektu", icon: <HomeIcon className="size-4" /> },
+  { name: "Finanse", icon: <BanknotesIcon className="size-4" /> },
   { name: "Kreator", icon: <SquaresPlusIcon className="size-4" /> },
 ];
 
@@ -23,13 +21,7 @@ type ComponentProps = {
   isError: boolean;
 };
 
-const ProjectTabs = ({
-  setTab,
-  tab,
-  projectId,
-  isLoading,
-  isError,
-}: ComponentProps) => {
+const ProjectTabs = ({ setTab, tab, isLoading, isError }: ComponentProps) => {
   if (isError) return <div className="h-16"></div>;
 
   return (
@@ -66,9 +58,6 @@ const ProjectTabs = ({
               ))}
             </Tabs.List>
           </Tabs>
-          <div>
-            <ProjectMenu projectId={projectId} />
-          </div>
         </div>
       )}
     </>

@@ -1,18 +1,19 @@
+import type { ExternalUrl } from "@/common/types/mixed";
+import type { ProjectStatus, ProjectType } from "./api";
+
 export type ProjectId = string;
 
-export enum ProjectStatus {
-  DESIGN = 0,
-  IN_PROGRESS = 1,
-  DONE = 2,
-}
+export type ProjectDetails = {
+  usableArea: number;
+  buildingArea: number;
+  urls: Array<ExternalUrl>;
+};
 
 export type Project = {
   id: ProjectId;
   name: string;
   description: string | null;
   status: ProjectStatus;
-  usableArea: number;
-  buildingArea: number;
-  createdAt: string;
-  updatedAt: string;
+  type: ProjectType;
+  details: ProjectDetails;
 };

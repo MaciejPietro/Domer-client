@@ -1,4 +1,4 @@
-import React, { useMemo, useReducer, useState } from "react";
+import { useMemo, useReducer, useState } from "react";
 
 import {
   type ColumnDef,
@@ -60,30 +60,30 @@ export default function ProjectsList() {
           <span className="font-semibold">{cell.getValue()}</span>
         ),
       },
-      {
-        header: () => <span>Powierzchnia zabudowy</span>,
-        accessorKey: "buildingArea",
-        cell: (cell: any) =>
-          cell.getValue() ? (
-            <span>
-              {cell.getValue()} m<sup>2</sup>
-            </span>
-          ) : (
-            <span></span>
-          ),
-      },
-      {
-        header: () => <span>Powierzchnia użytkowa</span>,
-        accessorKey: "usableArea",
-        cell: (cell: any) =>
-          cell.getValue() ? (
-            <span>
-              {cell.getValue()} m<sup>2</sup>
-            </span>
-          ) : (
-            <span></span>
-          ),
-      },
+      // {
+      //   header: () => <span>Powierzchnia zabudowy</span>,
+      //   accessorKey: "buildingArea",
+      //   cell: (cell: any) =>
+      //     cell.getValue() ? (
+      //       <span>
+      //         {cell.getValue()} m<sup>2</sup>
+      //       </span>
+      //     ) : (
+      //       <span></span>
+      //     ),
+      // },
+      // {
+      //   header: () => <span>Powierzchnia użytkowa</span>,
+      //   accessorKey: "usableArea",
+      //   cell: (cell: any) =>
+      //     cell.getValue() ? (
+      //       <span>
+      //         {cell.getValue()} m<sup>2</sup>
+      //       </span>
+      //     ) : (
+      //       <span></span>
+      //     ),
+      // },
       {
         header: () => <span>Utworzono</span>,
         accessorKey: "createdAt",

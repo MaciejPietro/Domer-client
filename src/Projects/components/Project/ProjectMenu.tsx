@@ -1,4 +1,9 @@
-import { TrashIcon } from "@heroicons/react/24/outline";
+import {
+  ArchiveBoxIcon,
+  Cog6ToothIcon,
+  DocumentIcon,
+  TrashIcon,
+} from "@heroicons/react/24/outline";
 import { Menu } from "@mantine/core";
 import type { ProjectId } from "@/Projects/types/mixed";
 import { useState } from "react";
@@ -13,20 +18,29 @@ export default function ProjectMenu({ projectId }: ComponentProps) {
 
   return (
     <div>
-      <Menu>
+      <Menu position="left">
         <Menu.Target>
           <button className="mb-2 mr-2 bg-gray-50 hover:bg-gray-100 transition-colors duration-100 size-10 flex items-center justify-center rounded">
-            <span className="text-xl text-black pb-3">...</span>
+            <Cog6ToothIcon className="size-4" />
           </button>
         </Menu.Target>
 
         <Menu.Dropdown>
-          {/* <Menu.Item
-            leftSection={<MagnifyingGlassCircleIcon className="w-6 h-6" />}
+          <Menu.Item
+            leftSection={<DocumentIcon className="size-4" />}
+            onClick={() => {}}
             disabled
           >
-            Search
-          </Menu.Item> */}
+            Wygeneruj .pdf
+          </Menu.Item>
+
+          <Menu.Item
+            leftSection={<ArchiveBoxIcon className="size-4" />}
+            onClick={() => {}}
+            disabled
+          >
+            Przenieś do archiwum
+          </Menu.Item>
 
           <Menu.Item
             color="red"
@@ -37,8 +51,6 @@ export default function ProjectMenu({ projectId }: ComponentProps) {
           >
             Usuń projekt
           </Menu.Item>
-
-          {/* Other items ... */}
         </Menu.Dropdown>
       </Menu>
 

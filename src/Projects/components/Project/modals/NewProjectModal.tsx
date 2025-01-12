@@ -8,14 +8,13 @@ import { useForm } from "@tanstack/react-form";
 import useCreateProject from "@/Projects/hooks/useCreateProject";
 import { ProjectStatus, type CreateProjectPayload } from "@/Projects/types/api";
 
-import { HttpStatusCode } from "axios";
 import ProjectForm, { type ProjectFormData } from "../forms/ProjectForm";
 import { getProjectFormInitData } from "@/Projects/utils/form";
 
 const NewProjectModal = () => {
   const [active, setActive] = useState(false);
 
-  const { mutateAsync, isPending } = useCreateProject();
+  const { mutateAsync, isPending, error } = useCreateProject();
 
   const form = useForm<ProjectFormData>({
     defaultValues: getProjectFormInitData(),
@@ -32,7 +31,7 @@ const NewProjectModal = () => {
 
       const res = await mutateAsync(formData);
 
-      if (res.status === HttpStatusCode.Created) {
+      if (res.data.isSuccess) {
         setActive(false);
       }
     },
@@ -66,6 +65,7 @@ const NewProjectModal = () => {
           </div>
           <ProjectForm
             form={form}
+            errors={error}
             isPending={isPending}
             handleCancel={() => {
               setActive(false);

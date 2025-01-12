@@ -5,6 +5,7 @@ import PlusIcon from "@heroicons/react/24/outline/PlusIcon";
 import CustomLabel from "../CustomLabel";
 import { useState } from "react";
 import { MinusIcon } from "@heroicons/react/24/outline";
+import type { ExternalUrl } from "@/common/types/mixed";
 
 type ComponentProps = {
   form: FormApi<any, undefined>;
@@ -24,16 +25,18 @@ const FormLinks = ({
   labelIcon,
 }: ComponentProps) => {
   const [rows, setRows] = useState<number>(
-    (form.state.values[name].length as number) || 1
+    form.state.values[name].length as number
   );
-
-  console.log("xdxd", form.state.values[name]);
 
   return (
     <form.Field
       name={name}
       validators={{
-        onSubmit: ({ value }: { value: boolean | undefined }) => {
+        onSubmit: ({ value }: { value: Array<ExternalUrl> }) => {
+          if (rows !== 0 && !value?.every((item) => item.name && item.url)) {
+            return "Nazwa i url są wymagane";
+          }
+
           if (required && value === undefined)
             return typeof required === "string"
               ? required
@@ -89,6 +92,7 @@ const FormLinks = ({
                         }}
                         placeholder="Url"
                         disabled={disabled}
+                        error={!!field.state.meta.errors.length}
                       />
                     </div>
                     <Button

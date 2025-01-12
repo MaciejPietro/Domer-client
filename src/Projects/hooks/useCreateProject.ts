@@ -15,10 +15,12 @@ const useCreateProject = () => {
   >({
     mutationKey: ["project", "create"],
     mutationFn: (values) => Service.createProject(values),
-    onSuccess: () => {
-      toastSuccess("Projekt został utworzony");
+    onSuccess: (response) => {
+      if (response.data.isSuccess) {
+        toastSuccess("Projekt został utworzony");
 
-      void queryClient.invalidateQueries({ queryKey: ["projects"] });
+        void queryClient.invalidateQueries({ queryKey: ["projects"] });
+      }
     },
   });
 };

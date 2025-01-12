@@ -6,6 +6,7 @@ import useProject from "../hooks/useProject";
 import ProjectTabs from "../components/Project/ProjectTabs";
 import Project404 from "../components/Project/404";
 import ProjectFinanses from "../components/Project/ProjectFinanses";
+import Creator from "../components/Project/elements/Creator";
 
 export type Tab = "Dane projektu" | "Finanse" | "Kreator";
 
@@ -41,14 +42,7 @@ const Projects = () => {
 
           {tab === "Finanse" ? <ProjectFinanses /> : null}
 
-          {tab === "Kreator" ? (
-            <div>
-              <iframe
-                src="https://domer.netlify.app/"
-                className="w-full h-[calc(100vh-4rem)] object-contain"
-              ></iframe>
-            </div>
-          ) : null}
+          {tab === "Kreator" ? <Creator /> : null}
         </>
       )}
     </Main>

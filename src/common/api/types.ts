@@ -5,6 +5,9 @@ export type ApiResponse = {
 };
 
 export type ApiResponseCommand = {
+  data: {
+    isSuccess: boolean;
+  };
   status: HttpStatusCode;
 };
 
@@ -17,4 +20,12 @@ export type ApiResultResponse<T> = {
 export type ApiError = {
   title: string;
   status: HttpStatusCode;
+};
+
+export type ApiErrors = {
+  title: string;
+  status: HttpStatusCode;
+  errors: Array<{
+    errorMessage: string;
+  }>;
 };

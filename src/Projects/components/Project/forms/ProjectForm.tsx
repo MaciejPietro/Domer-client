@@ -40,6 +40,7 @@ type ComponentProps = {
   handleCancel: () => void;
   buttonText: string;
   extended?: boolean;
+  errors?: any;
 };
 
 const ProjectForm = ({
@@ -48,6 +49,7 @@ const ProjectForm = ({
   isPending,
   buttonText,
   extended = false,
+  errors,
 }: ComponentProps) => {
   const [hasAdditionalInfo, setHasAdditionalInfo] = useState(false);
 
@@ -149,7 +151,7 @@ const ProjectForm = ({
             </Fieldset>
           </Collapse>
 
-          <FormError error={null} />
+          <FormError error={errors} />
 
           <div className="relative flex  space-x-4 mt-2">
             <Button

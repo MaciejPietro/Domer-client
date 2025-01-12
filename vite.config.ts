@@ -9,6 +9,7 @@ export default {
   server: {
     host: true,
     strictPort: true,
+    cors: true,
   },
   test: {
     environment: "jsdom",

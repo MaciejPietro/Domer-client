@@ -11,13 +11,6 @@ export const getProjectFormInitData = (project?: Project): ProjectFormData => {
     description: project?.description ? project.description : "",
     usableArea: project ? project.details.usableArea : null,
     buildingArea: project ? project.details.buildingArea : null,
-    urls: project
-      ? project.details.urls
-      : [
-          {
-            name: "",
-            url: "",
-          },
-        ],
+    urls: project ? project.details.urls : [],
   };
 };

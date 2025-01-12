@@ -114,7 +114,19 @@ export default function FinansesList() {
         </Table.Td>
         <Table.Td w={40}>
           <div className="flex gap-1">
-            <Tooltip label="Dane projektu">
+            <Tooltip label="Dodaj plik">
+              <Button
+                variant="subtle"
+                size="xs"
+                color="green"
+                onClick={() => {}}
+                className="!px-2 mb-2"
+              >
+                <PlusIcon className="w-4 h-4" />
+              </Button>
+            </Tooltip>
+
+            <Tooltip label="Zobacz pliki">
               <Button
                 variant="subtle"
                 size="xs"

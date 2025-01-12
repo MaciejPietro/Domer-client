@@ -1,13 +1,19 @@
 import { changeStatusOptions } from "@/Projects/data/updateProjectFormData";
 import { projectStatusDict } from "@/Projects/dicts";
-import { ProjectStatus } from "@/Projects/types/api";
+import useUpdateProject from "@/Projects/hooks/useUpdateProject";
+import { ProjectStatus, type UpdateProjectPayload } from "@/Projects/types/api";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
-import { Badge, Group, Popover, Radio, Select } from "@mantine/core";
+import { Badge, Group, type MantineSize, Popover, Radio } from "@mantine/core";
+import clsx from "clsx";
 import { useState } from "react";
 
 type ComponentProps = {
   status: ProjectStatus;
-};
+  size?: MantineSize;
+} & (
+  | { withoutForm: true; projectId?: string }
+  | { withoutForm?: false; projectId: string }
+);
 
 const statusMap = {
   [ProjectStatus.Draft]: {
@@ -15,14 +21,13 @@ const statusMap = {
     label: projectStatusDict[ProjectStatus.Draft],
   },
   [ProjectStatus.Archived]: {
-    color: "red",
+    color: "gray",
     label: projectStatusDict[ProjectStatus.Archived],
   },
   [ProjectStatus.Design]: {
     color: "green",
     label: projectStatusDict[ProjectStatus.Design],
   },
-
   [ProjectStatus.InProgress]: {
     color: "green",
     label: projectStatusDict[ProjectStatus.InProgress],
@@ -31,18 +36,42 @@ const statusMap = {
     color: "green",
     label: projectStatusDict[ProjectStatus.Done],
   },
+  [ProjectStatus.Paused]: {
+    color: "red",
+    label: projectStatusDict[ProjectStatus.Paused],
+  },
 };
 
-const StatusBadge = ({ status }: ComponentProps) => {
+const StatusBadge = ({
+  projectId,
+  status,
+  size = "lg",
+  withoutForm = false,
+}: ComponentProps) => {
   const [opened, setOpened] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState<string>(
+    status as unknown as string
+  );
 
-  const handleChangeStatus = (value: string | null) => {
-    console.log(value);
+  const { mutateAsync, isPending } = useUpdateProject({
+    projectId: projectId!,
+  });
+
+  const handleChangeStatus = async (value: string) => {
+    setSelectedStatus(value);
+
+    const formData: UpdateProjectPayload = {
+      status: +value,
+    };
+
+    await mutateAsync(formData);
   };
 
-  console.log("xdxd 2", status);
-
-  return (
+  return withoutForm ? (
+    <Badge variant="light" size={size} color={statusMap[status].color}>
+      {statusMap[status].label}
+    </Badge>
+  ) : (
     <div className="flex gap-2">
       <Popover
         width={300}
@@ -55,7 +84,7 @@ const StatusBadge = ({ status }: ComponentProps) => {
         <Popover.Target>
           <Badge
             variant="light"
-            size="lg"
+            size={size}
             color={statusMap[status].color}
             style={{
               cursor: "pointer",
@@ -76,20 +105,29 @@ const StatusBadge = ({ status }: ComponentProps) => {
           </Badge>
         </Popover.Target>
         <Popover.Dropdown>
-          {changeStatusOptions.map((option) => (
-            <Radio.Group
-              description={option.description}
-              mb="md"
-              value={status.toString()}
-              onChange={handleChangeStatus}
-            >
-              <Group mt="xs">
-                {option.items.map((item) => (
-                  <Radio value={item.value} label={item.label} />
-                ))}
-              </Group>
-            </Radio.Group>
-          ))}
+          <div className={clsx(isPending && "opacity-50 pointer-events-none")}>
+            {changeStatusOptions.map((option) => (
+              <Radio.Group
+                description={option.description}
+                mb="md"
+                value={selectedStatus.toString()}
+                onChange={(value) => {
+                  void handleChangeStatus(value);
+                }}
+                key={option.description}
+              >
+                <Group mt="xs">
+                  {option.items.map((item) => (
+                    <Radio
+                      value={item.value.toString()}
+                      label={item.label}
+                      key={item.value}
+                    />
+                  ))}
+                </Group>
+              </Radio.Group>
+            ))}
+          </div>
         </Popover.Dropdown>
       </Popover>
     </div>

@@ -53,6 +53,7 @@ const FormRadio = <T,>({
                   disabled={disabled}
                 /> */}
                 <Radios<T>
+                  value={field.state.value}
                   size={size}
                   onChange={field.handleChange}
                   options={options}

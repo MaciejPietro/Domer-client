@@ -12,9 +12,11 @@ type ComponentProps<T> = {
   errors?: Array<string | ValidationError>;
   options: Array<FloatingRadioItem<T>>;
   size?: "sm" | "md";
+  value?: T;
 };
 
 export default function FloatingRadios<T>({
+  value,
   options,
   onChange,
 }: ComponentProps<T>) {
@@ -22,7 +24,9 @@ export default function FloatingRadios<T>({
     throw new Error("No options provided");
   }
 
-  const [selected, setSelected] = useState<T | null>(options[0].code);
+  console.log("xdxd vlua", value);
+
+  const [selected, setSelected] = useState<T | null>(value ?? null);
 
   const handleChange = (key: T) => {
     setSelected(key);

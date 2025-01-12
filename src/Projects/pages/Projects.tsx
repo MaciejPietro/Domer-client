@@ -2,7 +2,7 @@ import { useState } from "react";
 import Main from "@/common/components/layout/Main";
 import clsx from "clsx";
 import ProjectsList from "@/Projects/components/ProjectsList";
-import NewProject from "../components/NewProject";
+import NewProjectModal from "../components/Project/modals/NewProjectModal";
 
 const tabs = [
   { name: "Aktywne projekty", href: "#", count: "2" },
@@ -15,7 +15,7 @@ const Tabs = ({ setTab, tab }: any) => {
     <div className="hidden sm:block">
       <div className="lg:px-8 flex items-end justify-between border-b border-gray-200 h-16">
         <nav className="-mb-px flex space-x-8" aria-label="Tabs">
-          {tabs.map(({ name, count }) => (
+          {tabs.map(({ name }) => (
             <button
               key={name}
               className={clsx(
@@ -46,7 +46,7 @@ const Tabs = ({ setTab, tab }: any) => {
         </nav>
 
         <div className="pb-3">
-          <NewProject />
+          <NewProjectModal />
         </div>
       </div>
     </div>

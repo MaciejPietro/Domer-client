@@ -17,7 +17,7 @@ const Projects = () => {
 
   const result = data?.data.result;
 
-  const [tab, setTab] = useState<Tab>("Finanse");
+  const [tab, setTab] = useState<Tab>("Dane projektu");
 
   // @ts-expect-error find why
   const isError = error?.response?.data?.status === 400;

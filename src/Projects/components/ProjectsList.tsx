@@ -16,6 +16,7 @@ import useProjects from "../hooks/useProjects";
 import { PROJECTS_PER_PAGE } from "../constants";
 import type { PageFilter } from "../types/api";
 import { Link } from "@tanstack/react-router";
+import StatusBadge from "./Project/partials/StatusBadge";
 
 // declare module '@tanstack/react-table' {
 //   //allows us to define custom properties for our columns
@@ -59,31 +60,16 @@ export default function ProjectsList() {
         cell: (cell: any) => (
           <span className="font-semibold">{cell.getValue()}</span>
         ),
+        size: 500,
       },
-      // {
-      //   header: () => <span>Powierzchnia zabudowy</span>,
-      //   accessorKey: "buildingArea",
-      //   cell: (cell: any) =>
-      //     cell.getValue() ? (
-      //       <span>
-      //         {cell.getValue()} m<sup>2</sup>
-      //       </span>
-      //     ) : (
-      //       <span></span>
-      //     ),
-      // },
-      // {
-      //   header: () => <span>Powierzchnia użytkowa</span>,
-      //   accessorKey: "usableArea",
-      //   cell: (cell: any) =>
-      //     cell.getValue() ? (
-      //       <span>
-      //         {cell.getValue()} m<sup>2</sup>
-      //       </span>
-      //     ) : (
-      //       <span></span>
-      //     ),
-      // },
+      {
+        header: () => <span>Status</span>,
+        accessorKey: "status",
+        cell: (cell: any) => (
+          <StatusBadge size="xs" status={cell.getValue()} withoutForm />
+        ),
+        size: 180,
+      },
       {
         header: () => <span>Utworzono</span>,
         accessorKey: "createdAt",
@@ -93,6 +79,7 @@ export default function ProjectsList() {
             month: "long",
             day: "numeric",
           }),
+        size: 180,
       },
       {
         header: () => <span>Zmodyfikowano</span>,
@@ -103,13 +90,8 @@ export default function ProjectsList() {
             month: "long",
             day: "numeric",
           }),
+        size: 180,
       },
-      //   {
-      //     accessorFn: (row) => `${row.firstName} ${row.lastName}`,
-      //     header: "Status",
-      //     meta: {
-      //       filterVariant: "select",
-      //     },
     ],
     []
   );
@@ -198,7 +180,11 @@ export default function ProjectsList() {
               <Table.Tr key={row.id}>
                 {row.getVisibleCells().map((cell) => {
                   return (
-                    <Table.Td key={cell.id} className="py-2 font-normal">
+                    <Table.Td
+                      key={cell.id}
+                      width={cell.column.getSize()}
+                      className="py-2 font-normal"
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -206,19 +192,21 @@ export default function ProjectsList() {
                     </Table.Td>
                   );
                 })}
-                <Table.Td key="actions">
-                  <Link to={`/projects/${row.original.id}`}>
-                    <Button variant="subtle">Zobacz</Button>
-                  </Link>
+                <Table.Td width={120} key="actions">
+                  <div className="flex justify-end">
+                    <Link to={`/projects/${row.original.id}`}>
+                      <Button variant="subtle">Zobacz</Button>
+                    </Link>
+                  </div>
                 </Table.Td>
               </Table.Tr>
             );
           })}
         </Table.Tbody>
-        <div className="mt-10 px-6">
-          <Pagination table={table} pages={pages} />
-        </div>
       </Table>
+      <div className="mt-10 px-6">
+        <Pagination table={table} pages={pages} />
+      </div>
       {/* <div className="text-xs mt-10 space-y-5">
         <pre>
           {JSON.stringify(

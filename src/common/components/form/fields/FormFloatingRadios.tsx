@@ -44,6 +44,7 @@ const FormFloatingRadios = <T,>({
             >
               <div className="relative mt-2 pb-1.5">
                 <FloatingRadios<T>
+                  value={field.state.value}
                   onChange={field.handleChange}
                   options={options}
                 />

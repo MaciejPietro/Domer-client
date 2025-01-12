@@ -1,20 +1,30 @@
 import {
   ArchiveBoxIcon,
   Cog6ToothIcon,
-  DocumentIcon,
+  PencilIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import { Menu } from "@mantine/core";
-import type { ProjectId } from "@/Projects/types/mixed";
-import { useState } from "react";
-import DeleteProjectModal from "@/Projects/components/Project/DeleteProjectModal";
+import type { Project } from "@/Projects/types/mixed";
+import { useState, lazy } from "react";
+import useMoveToArchiveProject from "@/Projects/hooks/useMoveToArchiveProject";
+import { ProjectStatus } from "@/Projects/types/api";
 
 type ComponentProps = {
-  projectId: ProjectId;
+  data: Project;
 };
 
-export default function ProjectMenu({ projectId }: ComponentProps) {
+// Lazy load the modals
+const DeleteProjectModal = lazy(() => import("./DeleteProjectModal"));
+const EditProjectModal = lazy(() => import("./modals/EditProjectModal"));
+
+export default function ProjectMenu({ data }: ComponentProps) {
   const [activeDeleteModal, setActiveDeleteModal] = useState(false);
+  const [activeEditModal, setActiveEditModal] = useState(false);
+
+  const { moveToArchive } = useMoveToArchiveProject(data.id);
+
+  const projectId = data.id;
 
   return (
     <div>
@@ -26,20 +36,31 @@ export default function ProjectMenu({ projectId }: ComponentProps) {
         </Menu.Target>
 
         <Menu.Dropdown>
-          <Menu.Item
+          {/* <Menu.Item
             leftSection={<DocumentIcon className="size-4" />}
             onClick={() => {}}
             disabled
           >
             Wygeneruj .pdf
-          </Menu.Item>
+          </Menu.Item> */}
 
           <Menu.Item
             leftSection={<ArchiveBoxIcon className="size-4" />}
-            onClick={() => {}}
-            disabled
+            onClick={() => {
+              void moveToArchive();
+            }}
+            disabled={data.status === ProjectStatus.Archived}
           >
             Przenieś do archiwum
+          </Menu.Item>
+
+          <Menu.Item
+            leftSection={<PencilIcon className="size-4" />}
+            onClick={() => {
+              setActiveEditModal(true);
+            }}
+          >
+            Edytuj
           </Menu.Item>
 
           <Menu.Item
@@ -54,11 +75,21 @@ export default function ProjectMenu({ projectId }: ComponentProps) {
         </Menu.Dropdown>
       </Menu>
 
-      <DeleteProjectModal
-        projectId={projectId}
-        active={activeDeleteModal}
-        setActive={setActiveDeleteModal}
-      />
+      {activeDeleteModal && (
+        <DeleteProjectModal
+          projectId={projectId}
+          active={activeDeleteModal}
+          setActive={setActiveDeleteModal}
+        />
+      )}
+
+      {activeEditModal && (
+        <EditProjectModal
+          project={data}
+          active={activeEditModal}
+          setActive={setActiveEditModal}
+        />
+      )}
     </div>
   );
 }

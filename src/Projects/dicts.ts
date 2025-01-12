@@ -6,6 +6,7 @@ export const projectStatusDict = {
   [ProjectStatus.Design]: "W trakcie projektowania",
   [ProjectStatus.InProgress]: "W trakcie realizacji",
   [ProjectStatus.Done]: "Zrealizowany",
+  [ProjectStatus.Paused]: "Wstrzymany",
 };
 
 export const projectTypeDict = {

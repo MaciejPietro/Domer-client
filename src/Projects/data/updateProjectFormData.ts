@@ -25,6 +25,10 @@ export const changeStatusOptions: Array<{
     description: "Aktywne",
     items: [
       {
+        label: projectStatusDict[ProjectStatus.Paused],
+        value: ProjectStatus.Paused,
+      },
+      {
         label: projectStatusDict[ProjectStatus.Design],
         value: ProjectStatus.Design,
       },

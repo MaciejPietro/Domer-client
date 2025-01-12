@@ -23,7 +23,11 @@ const FormLinks = ({
   disabled = false,
   labelIcon,
 }: ComponentProps) => {
-  const [rows, setRows] = useState<number>(1);
+  const [rows, setRows] = useState<number>(
+    (form.state.values[name].length as number) || 1
+  );
+
+  console.log("xdxd", form.state.values[name]);
 
   return (
     <form.Field
@@ -56,53 +60,55 @@ const FormLinks = ({
             }
           >
             <div className="relative pb-1.5">
-              {Array.from({ length: rows }).map((_, index) => (
-                <div className="flex items-center gap-2">
-                  <div key={index} className="grid grid-cols-3 gap-4">
-                    <Input
-                      value={field.state.value[index].name}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        const newValue = [...field.state.value];
-                        console.log("xdxd", newValue);
+              {Array.from({ length: rows }).map((_, index) =>
+                field.state.value[index] ? (
+                  <div className="flex items-center gap-2" key={`row-${index}`}>
+                    <div key={index} className="grid grid-cols-3 gap-4">
+                      <Input
+                        value={field.state.value[index].name}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          const newValue = [...field.state.value];
+                          console.log("xdxd", newValue);
 
-                        newValue[index].name = value;
-                        field.handleChange(newValue);
-                      }}
-                      placeholder="Nazwa"
-                      error={!!field.state.meta.errors.length}
-                      disabled={disabled}
-                    />
-                    <Input
-                      value={field.state.value[index].url}
-                      className="col-span-2"
-                      onChange={(e) => {
-                        const value = e.target.value;
+                          newValue[index].name = value;
+                          field.handleChange(newValue);
+                        }}
+                        placeholder="Nazwa"
+                        error={!!field.state.meta.errors.length}
+                        disabled={disabled}
+                      />
+                      <Input
+                        value={field.state.value[index].url}
+                        className="col-span-2"
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          const newValue = [...field.state.value];
+                          newValue[index].url = value;
+                          field.handleChange(newValue);
+                        }}
+                        placeholder="Url"
+                        disabled={disabled}
+                      />
+                    </div>
+                    <Button
+                      variant="subtle"
+                      size="xs"
+                      color="red"
+                      onClick={() => {
                         const newValue = [...field.state.value];
-                        newValue[index].url = value;
+                        newValue.splice(index, 1);
                         field.handleChange(newValue);
+
+                        setRows(rows - 1);
                       }}
-                      placeholder="Url"
-                      disabled={disabled}
-                    />
+                      className="!px-2 mb-2"
+                    >
+                      <MinusIcon className="w-4 h-4" />
+                    </Button>
                   </div>
-                  <Button
-                    variant="subtle"
-                    size="xs"
-                    color="red"
-                    onClick={() => {
-                      const newValue = [...field.state.value];
-                      newValue.splice(index, 1);
-                      field.handleChange(newValue);
-
-                      setRows(rows - 1);
-                    }}
-                    className="!px-2 mb-2"
-                  >
-                    <MinusIcon className="w-4 h-4" />
-                  </Button>
-                </div>
-              ))}
+                ) : null
+              )}
               <div>
                 <Button
                   variant="subtle"

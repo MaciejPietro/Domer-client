@@ -14,6 +14,7 @@ type ComponentProps<T> = {
   errors?: Array<string | ValidationError>;
   options: Array<RadioItem<T>>;
   size?: "sm" | "md";
+  value?: T;
 };
 
 const Radios = <T,>({
@@ -21,8 +22,9 @@ const Radios = <T,>({
   size = "sm",
   errors = [],
   onChange,
+  value,
 }: ComponentProps<T>) => {
-  const [selected, setSelected] = useState<T | null>(null);
+  const [selected, setSelected] = useState<T | null>(value ?? null);
 
   const handleChange = (key: T) => {
     setSelected(key);

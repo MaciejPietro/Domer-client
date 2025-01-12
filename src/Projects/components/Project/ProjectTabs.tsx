@@ -47,12 +47,16 @@ const ProjectTabs = ({ setTab, tab, isLoading, isError }: ComponentProps) => {
               },
             }}
             onChange={(value) => {
-              setTab(value);
+              setTab(value as Tab);
             }}
           >
             <Tabs.List className=" border-red-500">
               {tabs.map((tab) => (
-                <Tabs.Tab value={tab.name} leftSection={tab.icon}>
+                <Tabs.Tab
+                  value={tab.name}
+                  leftSection={tab.icon}
+                  key={tab.name}
+                >
                   {tab.name}
                 </Tabs.Tab>
               ))}

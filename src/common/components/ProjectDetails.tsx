@@ -19,7 +19,7 @@ const ProjectDetails = ({ data }: ComponentProps) => {
             <Title order={1} size="h2">
               {data.name}
             </Title>
-            <StatusBadge status={data.status} />
+            <StatusBadge status={data.status} projectId={data.id} />
 
             {data.description && (
               <div className="pt-3">
@@ -29,7 +29,7 @@ const ProjectDetails = ({ data }: ComponentProps) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <ProjectMenu projectId={data.id} />
+            <ProjectMenu data={data} />
           </div>
         </div>
 

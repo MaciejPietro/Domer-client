@@ -1,4 +1,4 @@
-import { useMemo, useReducer, useState } from "react";
+import { useEffect, useMemo, useReducer, useState } from "react";
 
 import {
   type ColumnDef,
@@ -12,40 +12,45 @@ import {
 } from "@tanstack/react-table";
 import Pagination from "@/common/components/table/Pagination";
 import { Button, Table } from "@mantine/core";
-import useProjects from "../hooks/useProjects";
-import { PROJECTS_PER_PAGE } from "../constants";
-import type { PageFilter } from "../types/api";
+import { PROJECTS_PER_PAGE } from "@/Projects/constants";
+import useProjects from "@/Projects/hooks/useProjects";
 import { Link } from "@tanstack/react-router";
-import StatusBadge from "./Project/partials/StatusBadge";
-
-// declare module '@tanstack/react-table' {
-//   //allows us to define custom properties for our columns
-//   interface ColumnMeta<TData extends RowData, TValue> {
-//     filterVariant?: 'text' | 'range' | 'select'
-//   }
-// }
+import StatusBadge from "../Project/partials/StatusBadge";
+import type { PageFilter, ProjectStatus } from "@/Projects/types/api";
+import type { TabOption } from "./ProjectsListTabs";
 
 type Project = any;
 
 type PageState = {
   page: PageFilter;
+  types: Array<ProjectStatus>;
 };
 
-type PageAction = { type: "SET_PAGE"; payload: PageFilter };
+type Action =
+  | { type: "SET_PAGE"; payload: PageFilter }
+  | { type: "SET_TYPES"; payload: Array<ProjectStatus> };
 
-function stateReducer(state: PageState, action: PageAction): PageState {
+function stateReducer(state: PageState, action: Action): PageState {
   switch (action.type) {
     case "SET_PAGE":
       return { ...state, page: action.payload };
+
+    case "SET_TYPES":
+      return { ...state, types: action.payload };
 
     default:
       return state;
   }
 }
 
-export default function ProjectsList() {
+type ComponentProps = {
+  tab: TabOption;
+};
+
+export default function ProjectsList({ tab }: ComponentProps) {
   const [state, dispatch] = useReducer(stateReducer, {
     page: { pageIndex: 1, pageSize: PROJECTS_PER_PAGE },
+    types: tab.statuses,
   });
 
   const { data } = useProjects(state);
@@ -128,6 +133,10 @@ export default function ProjectsList() {
   });
 
   const pages = data?.data.totalPages;
+
+  useEffect(() => {
+    dispatch({ type: "SET_TYPES", payload: tab.statuses });
+  }, [tab]);
 
   return (
     <>

@@ -3,10 +3,9 @@ import type { ProjectId } from "./mixed";
 export enum ProjectStatus {
   Draft = 0,
   Archived = 1,
-  Design = 2,
-  InProgress = 3,
-  Done = 4,
-  Paused = 5,
+  InProgress = 2,
+  Done = 3,
+  Paused = 4,
 }
 
 export enum ProjectType {
@@ -23,6 +22,7 @@ export type PageFilter = {
 
 export type GetAllProjectsPayload = {
   page: PageFilter;
+  types: Array<ProjectStatus>;
 };
 
 export type GetProjectPayload = {

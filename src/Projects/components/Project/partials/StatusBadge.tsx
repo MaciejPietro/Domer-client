@@ -24,10 +24,6 @@ const statusMap = {
     color: "gray",
     label: projectStatusDict[ProjectStatus.Archived],
   },
-  [ProjectStatus.Design]: {
-    color: "green",
-    label: projectStatusDict[ProjectStatus.Design],
-  },
   [ProjectStatus.InProgress]: {
     color: "green",
     label: projectStatusDict[ProjectStatus.InProgress],

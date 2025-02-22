@@ -1,4 +1,4 @@
-import { projectStatusDict, projectTypeDict } from "@/Projects/dicts";
+import { projectTypeDict } from "@/Projects/dicts";
 import type { Project } from "@/Projects/types/mixed";
 import { Space, Table, Title } from "@mantine/core";
 import { InformationCircleIcon, WrenchIcon } from "@heroicons/react/24/outline";
@@ -8,10 +8,7 @@ type ComponentProps = {
 };
 
 const Stats = ({ data }: ComponentProps) => {
-  const stats = [
-    { name: "Status projektu", value: projectStatusDict[data.status] },
-    { name: "Typ projektu", value: projectTypeDict[data.type] },
-  ];
+  const stats = [{ name: "Typ projektu", value: projectTypeDict[data.type] }];
 
   const technicalStats = [
     { name: "Pow. użytkowa", value: data.details.usableArea, unit: "m2" },

@@ -10,9 +10,9 @@ const Logo = () => {
       <img
         className={clsx(
           "h-8 w-auto transition-opacity absolute",
-          isCollapsedSidebar && "absolute opacity-0 pointer-events-none"
+          isCollapsedSidebar ? "absolute opacity-0 pointer-events-none" : ""
         )}
-        src="logo.png"
+        src="/logo.png"
         alt="Your Company"
       />
     </div>

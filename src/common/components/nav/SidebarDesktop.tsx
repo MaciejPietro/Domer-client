@@ -3,6 +3,8 @@ import {
   InformationCircleIcon,
   FolderIcon,
   HomeIcon,
+  CalendarIcon,
+  DocumentIcon,
 } from "@heroicons/react/24/outline";
 import { useRouterState } from "@tanstack/react-router";
 
@@ -15,7 +17,9 @@ import { Tooltip } from "@mantine/core";
 
 const navigation = [
   { name: "Panel", href: "/", icon: InformationCircleIcon, current: true },
-  { name: "Kreator", href: "/creator", icon: HomeIcon, current: false },
+  // { name: "Wizualizacja", href: "/creator", icon: HomeIcon, current: false },
+  // { name: "Kalendarz", href: "/calendar", icon: CalendarIcon, current: false },
+  // { name: "Dokumenty", href: "/documents", icon: DocumentIcon, current: false },
   { name: "Projekty", href: "/projects", icon: FolderIcon, current: false },
 ];
 

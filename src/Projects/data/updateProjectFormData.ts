@@ -29,10 +29,6 @@ export const changeStatusOptions: Array<{
         value: ProjectStatus.Paused,
       },
       {
-        label: projectStatusDict[ProjectStatus.Design],
-        value: ProjectStatus.Design,
-      },
-      {
         label: projectStatusDict[ProjectStatus.InProgress],
         value: ProjectStatus.InProgress,
       },

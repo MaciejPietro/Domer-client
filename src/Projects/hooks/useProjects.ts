@@ -13,8 +13,16 @@ const useProjects = (payload: GetAllProjectsPayload) => {
   params.set("page", pageIndex.toString());
   params.set("perPage", pageSize.toString());
 
+  if (payload.types.length > 0) {
+    payload.types.forEach((type) => {
+      params.append("status", type.toString());
+    });
+  }
+
+  const paramsString = params.toString();
+
   return useQuery<ApiResponse, AxiosError<string, any>, any>({
-    queryKey: ["projects", pageIndex, pageSize],
+    queryKey: ["projects", paramsString],
     queryFn: () => Service.getAll(params),
   });
 };
